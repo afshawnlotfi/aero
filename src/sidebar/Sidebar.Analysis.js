@@ -834,9 +834,7 @@ Sidebar.Analysis = function (editor) {
   }
 
   function run_callback(result) {
-    //        console.log(result);
     var datafile = false //=1 if the incoming json file should be parsed differently as bulk data
-
     if (result.error == undefined) {
       var type = runType.getValue()
       switch (type) {

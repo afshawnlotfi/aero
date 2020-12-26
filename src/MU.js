@@ -411,11 +411,8 @@ THREE.WingGeometry = function (
             }
           } else {
             if (y == loopstart) {
-              //                        console.log(n2.x,n2.y,n2.z)
               n2 = n1.clone()
               n3 = n4.clone()
-              //                        console.log(n2.x,n2.y,n2.z);
-              //                        console.log('next');
             }
             if (y == loopend - 1) {
               n1 = n2.clone()
@@ -1673,40 +1670,3 @@ var add_wing_reference_values = function (myObject) {
 }
 
 //----------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------
-var unlockAccount = function (callback) {
-  var data_json = {}
-  data_json.pswrd = prompt("Please enter your password")
-
-  var result_json
-  console.log(data_json)
-
-  var data_str = JSON.stringify(data_json, null, "\t")
-  data_str = data_str.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1")
-
-  console.log(data_str)
-  var url = "/wp-content/themes/aperture-child/MachUp/analysis/V2.0/unlock.php/"
-  $.ajax({
-    type: "post",
-    url: url,
-    //          data: {data_json:data_json}, // this has issues with the wing for some reason
-    data: { data_str: data_str },
-    beforeSend: function () {
-      // before send the request, displays a "Loading..." message in the element where the server response will be placed
-      $("#resp").html("Loading...")
-    },
-    //          async: false,
-    timeout: 100000, // sets timeout for the request (100 seconds)
-    error: function (xhr, status, error) {
-      console.log("Error in ajax call to server.")
-      alert("Error: " + xhr.status + " - " + error)
-    },
-    success: function (Result) {
-      console.log(Result)
-      result_json = $.parseJSON(Result)
-      console.log("Complete.")
-      callback(result_json)
-    },
-  })
-}
