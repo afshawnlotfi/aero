@@ -3008,43 +3008,42 @@
         ></div>
       </div>
     </div>
-    <link href="src/main.css" rel="stylesheet" />
-    <link id="theme" href="src/light.css" rel="stylesheet" />
-    <link rel="stylesheet" href="src/codemirror.css" />
+    <link href="./css/main.css" rel="stylesheet" />
+    <link id="theme" href="./css/light.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/codemirror.css" />
 
-    <script src="src/three.js"></script>
-    <script src="src/system.js"></script>
+    <script src="src/libs/three.js"></script>
+    <script src="src/libs/system.js"></script>
     <script src="src/MU.js"></script>
 
     <script src="src/EditorControls.js"></script>
     <script src="src/TransformControls.js"></script>
 
-    <script src="src/AWDLoader.js"></script>
-    <script src="src/BabylonLoader.js"></script>
-    <script src="src/ColladaLoader2.js"></script>
-    <script src="src/OBJLoader.js"></script>
-    <script src="src/PLYLoader.js"></script>
-    <script src="src/STLLoader.js"></script>
-    <script src="src/UTF8Loader.js"></script>
-    <script src="src/VRMLLoader.js"></script>
-    <script src="src/lzma.js"></script>
-    <script src="src/ctm.js"></script>
-    <script src="src/CTMLoader.js"></script>
-    <script src="src/OBJExporter.js"></script>
-    <script src="src/STLExporter.js"></script>
+    <script src="src/loaders/AWDLoader.js"></script>
+    <script src="src/loaders/BabylonLoader.js"></script>
+    <script src="src/loaders/ColladaLoader2.js"></script>
+    <script src="src/loaders/OBJLoader.js"></script>
+    <script src="src/loaders/PLYLoader.js"></script>
+    <script src="src/loaders/STLLoader.js"></script>
+    <script src="src/loaders/UTF8Loader.js"></script>
+    <script src="src/loaders/VRMLLoader.js"></script>
+    <script src="src/libs/lzma.js"></script>
+    <script src="src/libs/ctm.js"></script>
+    <script src="src/loaders/CTMLoader.js"></script>
+    <script src="src/exporters/OBJExporter.js"></script>
+    <script src="src/exporters/STLExporter.js"></script>
 
     <script src="src/SceneLoader.js"></script>
 
     <script src="src/Projector.js"></script>
-    <script src="src/CanvasRenderer.js"></script>
-    <script src="src/RaytracingRenderer.js"></script>
-    <script src="src/SoftwareRenderer.js"></script>
-    <script src="src/SVGRenderer.js"></script>
+    <script src="src/renderers/CanvasRenderer.js"></script>
+    <script src="src/renderers/RaytracingRenderer.js"></script>
+    <script src="src/renderers/SoftwareRenderer.js"></script>
+    <script src="src/renderers/SVGRenderer.js"></script>
 
-    <script src="src/codemirror.js"></script>
-
-    <script src="src/signals.js"></script>
-    <script src="src/ui.js"></script>
+    <script src="src/libs/codemirror.js"></script>
+    <script src="src/libs/signals.js"></script>
+    <script src="src/libs/ui.js"></script>
 
     <script src="src/app.js"></script>
     <script src="src/Player.js"></script>
@@ -3055,64 +3054,64 @@
     <script src="src/Config.js"></script>
     <script src="src/History.js"></script>
     <script src="src/Loader.js"></script>
-    <script src="src/Menubar.js"></script>
-    <script src="src/Menubar.File.js"></script>
-    <script src="src/Menubar.Edit.js"></script>
-    <script src="src/Menubar.Add.js"></script>
+    <script src="src/menubar/Menubar.js"></script>
+    <script src="src/menubar/Menubar.File.js"></script>
+    <script src="src/menubar/Menubar.Edit.js"></script>
+    <script src="src/menubar/Menubar.Add.js"></script>
 
-    <script src="src/Menubar.Settings.js"></script>
-    <script src="src/ Menubar.Status.js"></script>
-    <script src="src/Sidebar.js"></script>
-    <script src="src/Sidebar.Analysis.js"></script>
-    <script src="src/Sidebar.Condition.js"></script>
+    <script src="src/menubar/Menubar.Settings.js"></script>
+    <script src="src/menubar/Menubar.Status.js"></script>
+    <script src="src/sidebar/Sidebar.js"></script>
+    <script src="src/sidebar/Sidebar.Analysis.js"></script>
+    <script src="src/sidebar/Sidebar.Condition.js"></script>
 
-    <script src="src/Sidebar.Scene.js"></script>
-    <script src="src/Sidebar.Project.js"></script>
-    <script src="src/Sidebar.Settings.js"></script>
-    <script src="src/Sidebar.Properties.js"></script>
-    <script src="src/Sidebar.Object.js"></script>
-    <script src="src/Sidebar.Object3D.js"></script>
-    <script src="src/Sidebar.Geometry.js"></script>
-    <script src="src/Sidebar.Geometry.Geometry.js"></script>
-    <script src="src/Sidebar.Geometry.BufferGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.Modifiers.js"></script>
-    <script src="src/Sidebar.Geometry.BoxGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.CircleGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.CylinderGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.IcosahedronGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.PlaneGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.SphereGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.TorusGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.WingGeometry.js"></script>
-    <script src="src/Sidebar.Geometry.PropGeometry.js"></script>
-    <script src="src/Sidebar.Material.js"></script>
-    <script src="src/Sidebar.Animation.js"></script>
-    <script src="src/Sidebar.Script.js"></script>
-    <script src="src/Sidebar.History.js"></script>
+    <script src="src/sidebar/Sidebar.Scene.js"></script>
+    <script src="src/sidebar/Sidebar.Project.js"></script>
+    <script src="src/sidebar/Sidebar.Settings.js"></script>
+    <script src="src/sidebar/Sidebar.Properties.js"></script>
+    <script src="src/sidebar/Sidebar.Object.js"></script>
+    <script src="src/sidebar/Sidebar.Object3D.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.Geometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.BufferGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.Modifiers.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.BoxGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.CircleGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.CylinderGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.IcosahedronGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.PlaneGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.SphereGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.TorusGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.WingGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Geometry.PropGeometry.js"></script>
+    <script src="src/sidebar/Sidebar.Material.js"></script>
+    <script src="src/sidebar/Sidebar.Animation.js"></script>
+    <script src="src/sidebar/Sidebar.Script.js"></script>
+    <script src="src/sidebar/Sidebar.History.js"></script>
     <script src="src/Toolbar.js"></script>
     <script src="src/Viewport.js"></script>
 
-    <script src="src/Command.js"></script>
-    <script src="src/AddObjectCommand.js"></script>
-    <script src="src/RemoveObjectCommand.js"></script>
-    <script src="src/MoveObjectCommand.js"></script>
-    <script src="src/SetPositionCommand.js"></script>
-    <script src="src/SetRotationCommand.js"></script>
-    <script src="src/SetScaleCommand.js"></script>
-    <script src="src/SetValueCommand.js"></script>
-    <script src="src/SetUuidCommand.js"></script>
-    <script src="src/SetColorCommand.js"></script>
-    <script src="src/SetGeometryCommand.js"></script>
-    <script src="src/SetGeometryValueCommand.js"></script>
-    <script src="src/MultiCmdsCommand.js"></script>
-    <script src="src/AddScriptCommand.js"></script>
-    <script src="src/RemoveScriptCommand.js"></script>
-    <script src="src/SetScriptValueCommand.js"></script>
-    <script src="src/SetMaterialCommand.js"></script>
-    <script src="src/SetMaterialValueCommand.js"></script>
-    <script src="src/SetMaterialColorCommand.js"></script>
-    <script src="src/SetMaterialMapCommand.js"></script>
-    <script src="src/SetSceneCommand.js"></script>
+    <script src="src/commands/Command.js"></script>
+    <script src="src/commands/AddObjectCommand.js"></script>
+    <script src="src/commands/RemoveObjectCommand.js"></script>
+    <script src="src/commands/MoveObjectCommand.js"></script>
+    <script src="src/commands/SetPositionCommand.js"></script>
+    <script src="src/commands/SetRotationCommand.js"></script>
+    <script src="src/commands/SetScaleCommand.js"></script>
+    <script src="src/commands/SetValueCommand.js"></script>
+    <script src="src/commands/SetUuidCommand.js"></script>
+    <script src="src/commands/SetColorCommand.js"></script>
+    <script src="src/commands/SetGeometryCommand.js"></script>
+    <script src="src/commands/SetGeometryValueCommand.js"></script>
+    <script src="src/commands/MultiCmdsCommand.js"></script>
+    <script src="src/commands/AddScriptCommand.js"></script>
+    <script src="src/commands/RemoveScriptCommand.js"></script>
+    <script src="src/commands/SetScriptValueCommand.js"></script>
+    <script src="src/commands/SetMaterialCommand.js"></script>
+    <script src="src/commands/SetMaterialValueCommand.js"></script>
+    <script src="src/commands/SetMaterialColorCommand.js"></script>
+    <script src="src/commands/SetMaterialMapCommand.js"></script>
+    <script src="src/commands/SetSceneCommand.js"></script>
 
     <!-- <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="qyqgfqd9j8z890t"></script> -->
 
