@@ -4,524 +4,3483 @@
 <!--[if IE 8]><html class="ie8" lang="en-US"><![endif]-->
 <!--[if IE 9]><html class="ie9" lang="en-US"><![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html lang="en-US"><!--<![endif]--><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en-US">
+  <!--<!
+  [endif]--><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-  <!-- Style for modal pop-up -->
-  <style>
-    ul{
-      list-style-type: none;
-    }
-    .modal{
-      display: none;
-      position: fixed;
-      z-index: 1;
-      padding-top: 100px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.4);
-      overflow: auto;
-    }
-    .about-modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 20%;
-    }
-    .modal-content{
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 50%;
-    }
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .myBtn{
-      height: 35px;
-      width: 100px;
-      margin-right: 5px;
-      border: solid;
-      border-width: medium;
-      border-radius: 6px;
-      outline: none;
-      font-weight: bold;
-    }
-    #choose-theme {
-      overflow-x: hidden;
-    }
-    #btn-div{
-      display: flex;
-      justify-content: flex-end;
-    }
-    #agree{
-      color: white;
-      background: #2d7eff;
-    }
-    #agree:hover,
-    #agree:active{
-      background: #0253d6;
-    }
-    #disagree{
-      color: black;
-      background: #b2b2b2;
-      border-color: white;
-    }
-    #disagree:hover,
-    #disagree:active{
-      background: #828282;
-      border-color: white;
-    }
-  </style>
+    <!-- Style for modal pop-up -->
+    <style>
+      ul {
+        list-style-type: none;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        overflow: auto;
+      }
+      .about-modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%;
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+      }
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .myBtn {
+        height: 35px;
+        width: 100px;
+        margin-right: 5px;
+        border: solid;
+        border-width: medium;
+        border-radius: 6px;
+        outline: none;
+        font-weight: bold;
+      }
+      #choose-theme {
+        overflow-x: hidden;
+      }
+      #btn-div {
+        display: flex;
+        justify-content: flex-end;
+      }
+      #agree {
+        color: white;
+        background: #2d7eff;
+      }
+      #agree:hover,
+      #agree:active {
+        background: #0253d6;
+      }
+      #disagree {
+        color: black;
+        background: #b2b2b2;
+        border-color: white;
+      }
+      #disagree:hover,
+      #disagree:active {
+        background: #828282;
+        border-color: white;
+      }
+    </style>
 
+    <title>MachUp</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
 
-            <title>MachUp</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <script async="" src="MachUp_files/analytics.js"></script>
+    <script>
+      ;(function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r
+        ;(i[r] =
+          i[r] ||
+          function () {
+            ;(i[r].q = i[r].q || []).push(arguments)
+          }),
+          (i[r].l = 1 * new Date())
+        ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+        a.async = 1
+        a.src = g
+        m.parentNode.insertBefore(a, m)
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      )
 
-<script async="" src="MachUp_files/analytics.js"></script><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga("create", "UA-73011401-1", "auto")
+      ga("send", "pageview")
+    </script>
+  </head>
 
-  ga('create', 'UA-73011401-1', 'auto');
-  ga('send', 'pageview');
+  <body
+    ontouchstart=""
+    class="page-template page-template-MU5-0 page-template-MU5-0-php page page-id-69533 wpb-js-composer js-comp-ver-4.4.3 vc_responsive"
+  >
+    <div id="machup">
+      <div class="Panel" id="viewport" style="position: absolute">
+        <div
+          class="Panel"
+          id="info"
+          style="
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            font-size: 12px;
+            color: rgb(255, 255, 255);
+          "
+        ></div>
+        <canvas
+          width="980"
+          height="763"
+          style="width: 980px; height: 763px"
+        ></canvas>
+      </div>
+      <div class="Panel" id="player" style="position: absolute; display: none">
+        <div></div>
+      </div>
+      <div class="Panel" id="toolbar">
+        <div class="Panel">
+          <button
+            class="Button selected"
+            title="T"
+            style="display: inline-block"
+          >
+            translate</button
+          ><button class="Button" title="R" style="display: none">rotate</button
+          ><button class="Button" title="S" style="display: none">scale</button
+          ><span style="margin-right: 10px"
+            ><input class="Checkbox" type="checkbox" checked="checked" /><span
+              class="Text"
+              style="
+                cursor: default;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 3px;
+              "
+              >Show Grid</span
+            ></span
+          ><span style="margin-right: 10px"
+            ><input class="Checkbox" type="checkbox" /><span
+              class="Text"
+              style="
+                cursor: default;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 3px;
+              "
+              >Snap</span
+            ></span
+          ><input
+            class="Number"
+            style="
+              background-color: transparent;
+              cursor: col-resize;
+              width: 90px;
+              margin-top: 3px;
+            "
+            value="25.0000"
+          />
+        </div>
+      </div>
+      <div class="Panel" id="menubar">
+        <div class="menu"><div class="menu-title">MachUp 5</div></div>
+        <div class="menu">
+          <div class="title">File</div>
+          <div class="options">
+            <div class="option">New</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Open</div>
+            <div class="option">Save As...</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Export to MU Pro</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Import STL</div>
+            <div class="option">Export STL</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Quit</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">Edit</div>
+          <div class="options">
+            <div class="option">Undo (Ctrl+Z)</div>
+            <div class="inactive">Redo (Ctrl+Shift+Z)</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Clone Object</div>
+            <div class="option">Delete (Del)</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">Add</div>
+          <div class="options">
+            <div class="option">Group</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Wing</div>
+            <div class="option">Propeller</div>
+            <hr class="HorizontalRule" />
+            <div class="option">2-D Plane</div>
+            <div class="option">Box</div>
+            <div class="option">Circle</div>
+            <div class="option">Cylinder</div>
+            <div class="option">Sphere</div>
+            <div class="option">Torus</div>
+            <hr class="HorizontalRule" />
+            <div class="option">PointLight</div>
+            <div class="option">SpotLight</div>
+            <div class="option">DirectionalLight</div>
+            <div class="option">HemisphereLight</div>
+            <div class="option">AmbientLight</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">Settings</div>
+          <div class="options">
+            <div class="option">
+              Background Color<input
+                class="Color"
+                style="
+                  width: 64px;
+                  height: 17px;
+                  border: 0px none;
+                  padding: 2px;
+                  background-color: transparent;
+                "
+                type="color"
+                value="#aaaaaa"
+              />
+            </div>
+            <div class="option">Light Theme</div>
+            <div class="option">Dark Theme</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">Tutorials</div>
+          <div class="options">
+            <div class="option">Flying Wing</div>
+            <div class="option">Conventional Aircraft</div>
+            <div class="option">Airfoil Analysis Tool</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">Help</div>
+          <div class="options">
+            <div class="option">About MachUp</div>
+            <div class="option">threejs.org License</div>
+            <hr class="HorizontalRule" />
+            <div class="option">Request a feature</div>
+            <div class="option">Report a bug</div>
+            <div class="option">Get update notifications</div>
+          </div>
+        </div>
+        <div class="menu">
+          <div class="title">[Order Foam Core]</div>
+          <div class="options">
+            <div class="option">EPS Foam</div>
+            <div class="option">EPP Foam</div>
+          </div>
+        </div>
+        <div class="menu right" style="margin-top: 8px">
+          <span style="margin-right: 10px"
+            ><input class="Checkbox" type="checkbox" checked="checked" /><span
+              class="Text"
+              style="
+                cursor: default;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 3px;
+                color: rgb(136, 136, 136);
+                margin-top: -6px;
+                text-decoration: none;
+              "
+              >Autosave</span
+            ></span
+          >
+        </div>
+      </div>
+      <div class="Panel" id="sidebar">
+        <div id="tabs">
+          <span
+            class="selected"
+            style="
+              cursor: default;
+              display: inline-block;
+              vertical-align: middle;
+            "
+            >PARTS</span
+          ><span
+            class=""
+            style="
+              cursor: default;
+              display: inline-block;
+              vertical-align: middle;
+            "
+            >CONDITION</span
+          ><span
+            class=""
+            style="
+              cursor: default;
+              display: inline-block;
+              vertical-align: middle;
+            "
+            >ANALYSIS</span
+          >
+        </div>
+        <span style=""
+          ><div class="Panel" style="border-top: 0px none; padding-top: 20px">
+            <div class="Outliner" tabindex="0" id="outliner">
+              <div draggable="false" class="option">
+                <span class="type PerspectiveCamera"></span> Camera
+              </div>
+              <div draggable="false" class="option">
+                <span class="type Origin"></span> MyAirplane
+              </div>
+              <div draggable="true" style="padding-left: 10px" class="option">
+                <span class="type Mesh"></span> Center of Gravity
+                <span class="type SphereBufferGeometry"></span>
+                <span class="type MeshStandardMaterial"></span>
+              </div>
+              <div draggable="true" style="padding-left: 10px" class="option">
+                <span class="type Mesh"></span> Aerodynamic Center
+                <span class="type SphereBufferGeometry"></span>
+                <span class="type MeshStandardMaterial"></span>
+              </div>
+              <div draggable="true" style="padding-left: 10px" class="option">
+                <span class="type PointLight"></span> PointLight
+              </div>
+              <div draggable="true" style="padding-left: 10px" class="option">
+                <span class="type Mesh"></span> Wing_1
+                <span class="type WingGeometry"></span>
+                <span class="type MeshPhongMaterial"></span>
+              </div>
+            </div>
+            <br class="Break" />
+            <div class="Row" style="display: none; margin-left: 90px">
+              <input
+                class="Color"
+                style="
+                  width: 64px;
+                  height: 17px;
+                  border: 0px none;
+                  padding: 2px;
+                  background-color: transparent;
+                "
+                type="color"
+                value="#aaaaaa"
+              /><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 40px;
+                  display: none;
+                "
+                value="0.1000"
+              /><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 40px;
+                  display: none;
+                "
+                value="50.0000"
+              /><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 40px;
+                  display: none;
+                "
+                value="0.0500"
+              />
+            </div>
+          </div>
+          <span
+            ><div id="tabs">
+              <span
+                class="selected"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >OBJECT</span
+              ><span
+                class=""
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >GEOMETRY</span
+              ><span
+                class=""
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >MATERIAL</span
+              >
+            </div>
+            <span style=""
+              ><div
+                class="Panel"
+                style="border-top: 0px none; padding-top: 20px; display: none"
+              >
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Name</span
+                  ><input
+                    class="Input"
+                    style="
+                      padding: 2px;
+                      border: 1px solid transparent;
+                      width: 150px;
+                      color: rgb(0, 0, 0);
+                      font-size: 12px;
+                    "
+                    value="Wing_1"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Connect To</span
+                  ><select
+                    class="Select"
+                    style="
+                      padding: 2px;
+                      width: 150px;
+                      color: rgb(0, 0, 0);
+                      font-size: 12px;
+                    "
+                  >
+                    <option value="3" selected="selected">MyAirplane</option>
+                    <option value="79">Center of Gravity</option>
+                    <option value="80">Aerodynamic Center</option>
+                    <option value="81">PointLight</option>
+                    <option value="85">Wing_1</option>
+                  </select>
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Position</span
+                  ><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Rotation</span
+                  ><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="0.0000"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Scale</span
+                  ><input
+                    class="Checkbox"
+                    type="checkbox"
+                    style="position: absolute; left: 75px"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="1.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="1.0000"
+                  /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 50px;
+                    "
+                    value="1.0000"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Fov</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Near</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Far</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Intensity</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Color</span
+                  ><input
+                    class="Color"
+                    style="
+                      width: 64px;
+                      height: 17px;
+                      border: 0px none;
+                      padding: 2px;
+                      background-color: transparent;
+                    "
+                    type="color"
+                    value="#ffffff"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Ground color</span
+                  ><input
+                    class="Color"
+                    style="
+                      width: 64px;
+                      height: 17px;
+                      border: 0px none;
+                      padding: 2px;
+                      background-color: transparent;
+                    "
+                    type="color"
+                    value="#ffffff"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Distance</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Angle (deg)</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Penumbra</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row" style="display: none">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Decay</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="0.00"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Visible</span
+                  ><input
+                    class="Checkbox"
+                    type="checkbox"
+                    style="margin-left: -31px"
+                    checked="checked"
+                  />
+                </div></div></span
+            ><span style="display: none"
+              ><div
+                class="Panel"
+                style="border-top: 0px none; padding-top: 20px; display: none"
+              >
+                <div class="Row" style="display: none"></div>
+                <span
+                  ><div class="Row">
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 140px;
+                        "
+                        >Main Wing</span
+                      ><input
+                        class="Checkbox"
+                        type="checkbox"
+                        style="margin-left: -40px"
+                        checked="checked"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Side</span
+                      ><select
+                        class="Select"
+                        style="
+                          padding: 2px;
+                          width: 100px;
+                          color: rgb(0, 0, 0);
+                          font-size: 12px;
+                        "
+                      >
+                        <option value="both" selected="selected">Both</option>
+                        <option value="right">Right</option>
+                        <option value="left">Left</option>
+                      </select>
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >y-Offset</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="0.0000"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Semispan</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="4.0000"
+                      />
+                    </div>
+                    <hr class="HorizontalRule" />
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Mount Angle (deg)</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="0.0000"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Washout (deg)</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="0.0000"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Sweep (deg)</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="0.0000"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Dihedral (deg)</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="0.0000"
+                      />
+                    </div>
+                    <hr class="HorizontalRule" />
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Root Chord</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="1.0000"
+                      />
+                    </div>
+                    <div class="Row">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 100px;
+                        "
+                        >Tip Chord</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="1.0000"
+                      />
+                    </div>
+                    <div class="Panel Collapsible collapsed">
+                      <div class="Static">
+                        <div class="Button"></div>
+                        <span
+                          class="Text"
+                          style="
+                            cursor: default;
+                            display: inline-block;
+                            vertical-align: middle;
+                          "
+                          >Root Airfoil</span
+                        >
+                      </div>
+                      <div class="Content">
+                        <br class="Break" />
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Airfoil (graphics only)</span
+                          ><input
+                            class="Input"
+                            style="
+                              padding: 2px;
+                              border: 1px solid transparent;
+                              width: 100px;
+                              color: rgb(68, 68, 68);
+                              font-size: 12px;
+                            "
+                            value="NACA 2412"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift Alpha (rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0369"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Lift Slope (1/rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="6.2832"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift Cm</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0527"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Moment Slope (1/rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0800"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift CD</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0055"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >CD,L</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0045"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >CD,L^2</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0100"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Max Lift Coefficient</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="1.4000"
+                          />
+                        </div>
+                        <br class="Break" />
+                      </div>
+                    </div>
+                    <div
+                      class="Panel Collapsible collapsed"
+                      style="margin-bottom: -8px"
+                    >
+                      <div class="Static">
+                        <div class="Button"></div>
+                        <span
+                          class="Text"
+                          style="
+                            cursor: default;
+                            display: inline-block;
+                            vertical-align: middle;
+                          "
+                          >Tip Airfoil</span
+                        >
+                      </div>
+                      <div class="Content">
+                        <div class="Row" style="width: 300px; margin-top: 10px">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Same as Root</span
+                          ><input
+                            class="Checkbox"
+                            type="checkbox"
+                            checked="checked"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Airfoil (graphics only)</span
+                          ><input
+                            class="Input"
+                            style="
+                              padding: 2px;
+                              border: 1px solid transparent;
+                              width: 100px;
+                              color: rgb(68, 68, 68);
+                              font-size: 12px;
+                            "
+                            value="NACA 2412"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift Alpha (rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0369"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Lift Slope (1/rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="6.2832"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift Cm</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0527"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Moment Slope (1/rad)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0800"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Zero-Lift CD</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0055"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >CD,L</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="-0.0045"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >CD,L^2</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0100"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Max Lift Coefficient</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="1.4000"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="HorizontalRule" />
+                    <div class="Row" style="width: 300px">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 140px;
+                        "
+                        >Spanwise Segments</span
+                      ><input
+                        class="Number"
+                        style="
+                          background-color: transparent;
+                          cursor: col-resize;
+                        "
+                        value="40"
+                      />
+                    </div>
+                    <div class="Row" style="width: 300px">
+                      <span
+                        class="Text"
+                        style="
+                          cursor: default;
+                          display: inline-block;
+                          vertical-align: middle;
+                          width: 140px;
+                        "
+                        >Airfoil Segments</span
+                      ><select
+                        class="Select"
+                        style="
+                          padding: 2px;
+                          width: 80px;
+                          color: rgb(68, 68, 68);
+                          font-size: 12px;
+                        "
+                      >
+                        <option value="50" selected="selected">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                      </select>
+                    </div>
+                    <div class="Panel Collapsible collapsed">
+                      <div class="Static">
+                        <div class="Button"></div>
+                        <span
+                          class="Text"
+                          style="
+                            cursor: default;
+                            display: inline-block;
+                            vertical-align: middle;
+                          "
+                          >Control Surface</span
+                        >
+                      </div>
+                      <div class="Content">
+                        <br class="Break" />
+                        <div class="Row">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Has control surface</span
+                          ><input class="Checkbox" type="checkbox" />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Root/Span</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.2000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Tip/Span</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.8000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >C_f (root)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.2000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >C_f (tip)</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.2000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Elevator Mix</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="1.0000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Rudder Mix</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Aileron Mix</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0000"
+                          />
+                        </div>
+                        <div class="Row" style="width: 300px; display: none">
+                          <span
+                            class="Text"
+                            style="
+                              cursor: default;
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 140px;
+                            "
+                            >Flap Mix</span
+                          ><input
+                            class="Number"
+                            style="
+                              background-color: transparent;
+                              cursor: col-resize;
+                            "
+                            value="0.0000"
+                          />
+                        </div>
+                      </div>
+                    </div></div
+                ></span></div></span
+            ><span style="display: none"
+              ><div
+                class="Panel"
+                style="border-top: 0px none; padding-top: 20px; display: none"
+              >
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Color</span
+                  ><input
+                    class="Color"
+                    style="
+                      width: 64px;
+                      height: 17px;
+                      border: 0px none;
+                      padding: 2px;
+                      background-color: transparent;
+                    "
+                    type="color"
+                    value="#ffffff"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Emissive</span
+                  ><input
+                    class="Color"
+                    style="
+                      width: 64px;
+                      height: 17px;
+                      border: 0px none;
+                      padding: 2px;
+                      background-color: transparent;
+                    "
+                    type="color"
+                    value="#000000"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Shininess</span
+                  ><input
+                    class="Number"
+                    style="background-color: transparent; cursor: col-resize"
+                    value="30.0000"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Side</span
+                  ><select
+                    class="Select"
+                    style="padding: 2px; width: 150px; font-size: 12px"
+                  >
+                    <option value="0">Front</option>
+                    <option value="1">Back</option>
+                    <option value="2" selected="selected">Double</option>
+                  </select>
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Opacity</span
+                  ><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 60px;
+                    "
+                    value="1.0000"
+                  />
+                </div>
+                <div class="Row">
+                  <span
+                    class="Text"
+                    style="
+                      cursor: default;
+                      display: inline-block;
+                      vertical-align: middle;
+                      width: 90px;
+                    "
+                    >Wireframe</span
+                  ><input class="Checkbox" type="checkbox" /><input
+                    class="Number"
+                    style="
+                      background-color: transparent;
+                      cursor: col-resize;
+                      width: 60px;
+                    "
+                    value="1.0000"
+                  />
+                </div></div></span
+          ></span>
+          <div class="Panel Collapsible collapsed" style="display: none">
+            <div class="Static">
+              <div class="Button"></div>
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  text-transform: uppercase;
+                "
+                >Animation</span
+              >
+            </div>
+            <div class="Content">
+              <br class="Break" />
+              <div class="Row"></div>
+            </div></div></span
+        ><span style="display: none"
+          ><div class="Panel" style="border-top: 0px none; padding-top: 20px">
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Units</span
+              ><select
+                class="Select"
+                style="
+                  padding: 2px;
+                  width: 100px;
+                  color: rgb(0, 0, 0);
+                  font-size: 12px;
+                "
+              >
+                <option value="English" selected="selected">English</option>
+                <option value="SI">SI</option>
+              </select>
+            </div>
+            <div class="Row">
+              <hr class="HorizontalRule" />
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Velocity (ft/s)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="10.0000"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Density (slugs/ft^3)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0024"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Angle of Attack (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Sideslip (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <hr class="HorizontalRule" />
+            </div>
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >Control Surfaces</span
+              ><br class="Break" />
+              <hr class="HorizontalRule" />
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Elevator (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Rudder (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Aileron (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Flap (deg)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="0.0000"
+                />
+              </div>
+              <hr class="HorizontalRule" />
+            </div>
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >Propeller</span
+              ><br class="Break" />
+              <hr class="HorizontalRule" />
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Rotation Rate (rpm)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="1800"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px; display: none">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Throttle (%)</span
+                ><input
+                  class="Number"
+                  style="background-color: transparent; cursor: col-resize"
+                  value="100"
+                />
+              </div>
+              <div class="Row" style="margin-left: 10px; display: none">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Individual Control</span
+                ><input class="Checkbox" type="checkbox" />
+              </div>
+            </div>
+            <hr class="HorizontalRule" /></div></span
+        ><span style="display: none"
+          ><div class="Panel" style="border-top: 0px none; padding-top: 20px">
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 80px;
+                "
+                >Run</span
+              ><select
+                class="Select"
+                style="
+                  padding: 2px;
+                  width: 175px;
+                  color: rgb(0, 0, 0);
+                  font-size: 12px;
+                "
+              >
+                <option value="forces" selected="selected">
+                  Forces and Moments
+                </option>
+                <option value="derivatives">Performance Derivatives</option>
+                <option value="aerocenter">Aerodynamic Center</option>
+                <option value="stallonset">Stall Onset</option>
+                <option value="stallairspeed">Stall Airspeed</option>
+                <option value="targetl">Target Lift</option>
+                <option value="pitchtrim">Pitch Trim</option>
+                <option value="distributions">Distributions</option>
+              </select>
+            </div>
+            <div class="Row" style="display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Target Lift</span
+              ><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 70px;
+                "
+                value="0.0000"
+              /><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >lbs</span
+              >
+            </div>
+            <div class="Row" style="display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Target Moment</span
+              ><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 70px;
+                "
+                value="0.0000"
+              /><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >lb-ft</span
+              >
+            </div>
+            <div class="Row" style="display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Weight</span
+              ><input
+                class="Number"
+                style="
+                  background-color: transparent;
+                  cursor: col-resize;
+                  width: 70px;
+                "
+                value="10.0000"
+              /><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >lbs</span
+              >
+            </div>
+            <hr class="HorizontalRule" />
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 10px;
+                "
+              ></span
+              ><button class="Button">Update Results</button
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 5px;
+                "
+              ></span
+              ><button class="Button">Save Results</button>
+            </div>
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Reference Area</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 50px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+                >0.0000</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >ft^2</span
+              >
+            </div>
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Longitudinal Length</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 50px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+                >0.0000</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 25px;
+                "
+                >ft</span
+              >
+            </div>
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Lateral Length</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 50px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+                >0.0000</span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 25px;
+                "
+                >ft</span
+              >
+            </div>
+            <hr class="HorizontalRule" />
+            <div class="Row" style="">
+              <div class="Row">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >Lifting Surface Results</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Lift = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Drag = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >L/D = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span>
+              </div>
+            </div>
+            <div class="Row" style="">
+              <div class="Row">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >Prop Results</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Thrust = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >Torque = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lb-ft</span
+                >
+              </div>
+            </div>
+            <div class="Row" style="">
+              <div class="Row">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >Total Results</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >FL = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >FD = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >FS = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lbs</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >MX = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lb-ft</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >MY = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lb-ft</span
+                >
+              </div>
+              <div class="Row" style="margin-left: 10px">
+                <span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 140px;
+                  "
+                  >MZ = </span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 75px;
+                    color: rgb(136, 136, 136);
+                    font-size: 12px;
+                  "
+                ></span
+                ><span
+                  class="Text"
+                  style="
+                    cursor: default;
+                    display: inline-block;
+                    vertical-align: middle;
+                  "
+                  >lb-ft</span
+                >
+              </div>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+              >
+                All Units = 1/rad</span
+              >
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >CL,alpha = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >CD,alpha = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Cm,alpha = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >CS,beta = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Cl,beta = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Cn,beta = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Static Margin = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >x = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >z = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Stall Airspeed = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >ft/s</span
+              >
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Angle of Attack = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >deg</span
+              >
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Lift = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                "
+                >lbs</span
+              >
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Stalled Wing = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >Span Location (%) = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >alpha (deg) = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+            <div class="Row" style="margin-left: 10px; display: none">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 140px;
+                "
+                >elevator (deg) = </span
+              ><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 75px;
+                  color: rgb(136, 136, 136);
+                  font-size: 12px;
+                "
+              ></span>
+            </div>
+          </div>
+          <div
+            class="Panel"
+            style="border-top: 0px none; padding-top: 20px"
+          ></div></span
+        ><span style="display: none"
+          ><div class="Panel" style="border-top: 0px none; padding-top: 20px">
+            <div class="Row">
+              <span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 90px;
+                "
+                >Theme</span
+              ><select class="Select" style="padding: 2px; width: 150px">
+                <option
+                  value="./css/light.css"
+                  selected="selected"
+                >
+                  light
+                </option>
+                <option
+                  value="./css/dark.css"
+                >
+                  dark
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="Panel">
+            <span
+              class="Text"
+              style="
+                cursor: default;
+                display: inline-block;
+                vertical-align: middle;
+              "
+              >HISTORY</span
+            ><span style="margin-right: 10px; position: absolute; right: 8px"
+              ><input class="Checkbox" type="checkbox" /><span
+                class="Text"
+                style="
+                  cursor: default;
+                  display: inline-block;
+                  vertical-align: middle;
+                  margin-left: 3px;
+                "
+                >persistent</span
+              ></span
+            ><br class="Break" /><br class="Break" />
+            <div class="Outliner" tabindex="0">
+              <div class="option active">&nbsp;Add Object: Wing_1</div>
+            </div>
+          </div></span
+        >
+      </div>
+      <div
+        style="
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: none;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div
+          class="Panel"
+          style="
+            width: 200px;
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
+          "
+        ></div>
+      </div>
+    </div>
+    <link href="MachUp_files/main.css" rel="stylesheet" />
+    <link id="theme" href="MachUp_files/light.css" rel="stylesheet" />
+    <link rel="stylesheet" href="MachUp_files/codemirror.css" />
 
-</script>
+    <script src="MachUp_files/jquery.js"></script>
+    <script src="MachUp_files/jquery_002.js"></script>
 
+    <script src="MachUp_files/three.js"></script>
+    <script src="MachUp_files/system.js"></script>
+    <script src="MachUp_files/MU.js"></script>
 
-    
-</head>
+    <script src="MachUp_files/EditorControls.js"></script>
+    <script src="MachUp_files/TransformControls.js"></script>
 
-	<body ontouchstart="" class="page-template page-template-MU5-0 page-template-MU5-0-php page page-id-69533 wpb-js-composer js-comp-ver-4.4.3 vc_responsive">
+    <script src="MachUp_files/AWDLoader.js"></script>
+    <script src="MachUp_files/BabylonLoader.js"></script>
+    <script src="MachUp_files/ColladaLoader2.js"></script>
+    <script src="MachUp_files/OBJLoader.js"></script>
+    <script src="MachUp_files/PLYLoader.js"></script>
+    <script src="MachUp_files/STLLoader.js"></script>
+    <script src="MachUp_files/UTF8Loader.js"></script>
+    <script src="MachUp_files/VRMLLoader.js"></script>
+    <script src="MachUp_files/lzma.js"></script>
+    <script src="MachUp_files/ctm.js"></script>
+    <script src="MachUp_files/CTMLoader.js"></script>
+    <script src="MachUp_files/OBJExporter.js"></script>
+    <script src="MachUp_files/STLExporter.js"></script>
 
-<div id="machup"><div class="Panel" id="viewport" style="position: absolute;"><div class="Panel" id="info" style="position: absolute; left: 10px; bottom: 10px; font-size: 12px; color: rgb(255, 255, 255);"></div><canvas width="980" height="763" style="width: 980px; height: 763px;"></canvas></div><div class="Panel" id="player" style="position: absolute; display: none;"><div></div></div><div class="Panel" id="toolbar"><div class="Panel"><button class="Button selected" title="T" style="display: inline-block;">translate</button><button class="Button" title="R" style="display: none;">rotate</button><button class="Button" title="S" style="display: none;">scale</button><span style="margin-right: 10px;"><input class="Checkbox" type="checkbox" checked="checked"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; margin-left: 3px;">Show Grid</span></span><span style="margin-right: 10px;"><input class="Checkbox" type="checkbox"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; margin-left: 3px;">Snap</span></span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 90px; margin-top: 3px;" value="25.0000"></div></div><div class="Panel" id="menubar"><div class="menu"><div class="menu-title">MachUp 5</div></div><div class="menu"><div class="title">File</div><div class="options"><div class="option">New</div><hr class="HorizontalRule"><div class="option">Open</div><div class="option">Save As...</div><hr class="HorizontalRule"><div class="option">Export to MU Pro</div><hr class="HorizontalRule"><div class="option">Import STL</div><div class="option">Export STL</div><hr class="HorizontalRule"><div class="option">Quit</div></div></div><div class="menu"><div class="title">Edit</div><div class="options"><div class="option">Undo (Ctrl+Z)</div><div class="inactive">Redo (Ctrl+Shift+Z)</div><hr class="HorizontalRule"><div class="option">Clone Object</div><div class="option">Delete (Del)</div></div></div><div class="menu"><div class="title">Add</div><div class="options"><div class="option">Group</div><hr class="HorizontalRule"><div class="option">Wing</div><div class="option">Propeller</div><hr class="HorizontalRule"><div class="option">2-D Plane</div><div class="option">Box</div><div class="option">Circle</div><div class="option">Cylinder</div><div class="option">Sphere</div><div class="option">Torus</div><hr class="HorizontalRule"><div class="option">PointLight</div><div class="option">SpotLight</div><div class="option">DirectionalLight</div><div class="option">HemisphereLight</div><div class="option">AmbientLight</div></div></div><div class="menu"><div class="title">Settings</div><div class="options"><div class="option">Background Color<input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#aaaaaa"></div><div class="option">Light Theme</div><div class="option">Dark Theme</div></div></div><div class="menu"><div class="title">Tutorials</div><div class="options"><div class="option">Flying Wing</div><div class="option">Conventional Aircraft</div><div class="option">Airfoil Analysis Tool</div></div></div><div class="menu"><div class="title">Help</div><div class="options"><div class="option">About MachUp</div><div class="option">threejs.org License</div><hr class="HorizontalRule"><div class="option">Request a feature</div><div class="option">Report a bug</div><div class="option">Get update notifications</div></div></div><div class="menu"><div class="title">[Order Foam Core]</div><div class="options"><div class="option">EPS Foam</div><div class="option">EPP Foam</div></div></div><div class="menu right" style="margin-top: 8px;"><span style="margin-right: 10px;"><input class="Checkbox" type="checkbox" checked="checked"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; margin-left: 3px; color: rgb(136, 136, 136); margin-top: -6px; text-decoration: none;">Autosave</span></span></div></div><div class="Panel" id="sidebar"><div id="tabs"><span class="selected" style="cursor: default; display: inline-block; vertical-align: middle;">PARTS</span><span class="" style="cursor: default; display: inline-block; vertical-align: middle;">CONDITION</span><span class="" style="cursor: default; display: inline-block; vertical-align: middle;">ANALYSIS</span></div><span style=""><div class="Panel" style="border-top: 0px none; padding-top: 20px;"><div class="Outliner" tabindex="0" id="outliner"><div draggable="false" class="option"><span class="type PerspectiveCamera"></span> Camera</div><div draggable="false" class="option"><span class="type Origin"></span> MyAirplane</div><div draggable="true" style="padding-left: 10px;" class="option"><span class="type Mesh"></span> Center of Gravity <span class="type SphereBufferGeometry"></span>  <span class="type MeshStandardMaterial"></span> </div><div draggable="true" style="padding-left: 10px;" class="option"><span class="type Mesh"></span> Aerodynamic Center <span class="type SphereBufferGeometry"></span>  <span class="type MeshStandardMaterial"></span> </div><div draggable="true" style="padding-left: 10px;" class="option"><span class="type PointLight"></span> PointLight</div><div draggable="true" style="padding-left: 10px;" class="option"><span class="type Mesh"></span> Wing_1 <span class="type WingGeometry"></span>  <span class="type MeshPhongMaterial"></span> </div></div><br class="Break"><div class="Row" style="display: none; margin-left: 90px;"><input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#aaaaaa"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 40px; display: none;" value="0.1000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 40px; display: none;" value="50.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 40px; display: none;" value="0.0500"></div></div><span><div id="tabs"><span class="selected" style="cursor: default; display: inline-block; vertical-align: middle;">OBJECT</span><span class="" style="cursor: default; display: inline-block; vertical-align: middle;">GEOMETRY</span><span class="" style="cursor: default; display: inline-block; vertical-align: middle;">MATERIAL</span></div><span style=""><div class="Panel" style="border-top: 0px none; padding-top: 20px; display: none;"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Name</span><input class="Input" style="padding: 2px; border: 1px solid transparent; width: 150px; color: rgb(0, 0, 0); font-size: 12px;" value="Wing_1"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Connect To</span><select class="Select" style="padding: 2px; width: 150px; color: rgb(0, 0, 0); font-size: 12px;"><option value="3" selected="selected">MyAirplane</option><option value="79">Center of Gravity</option><option value="80">Aerodynamic Center</option><option value="81">PointLight</option><option value="85">Wing_1</option></select></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Position</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Rotation</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="0.0000"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Scale</span><input class="Checkbox" type="checkbox" style="position: absolute; left: 75px;"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="1.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="1.0000"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 50px;" value="1.0000"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Fov</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Near</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Far</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Intensity</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Color</span><input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#ffffff"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Ground color</span><input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#ffffff"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Distance</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Angle (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Penumbra</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Decay</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.00"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Visible</span><input class="Checkbox" type="checkbox" style="margin-left: -31px;" checked="checked"></div></div></span><span style="display: none;"><div class="Panel" style="border-top: 0px none; padding-top: 20px; display: none;"><div class="Row" style="display: none;"></div><span><div class="Row"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Main Wing</span><input class="Checkbox" type="checkbox" style="margin-left: -40px;" checked="checked"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Side</span><select class="Select" style="padding: 2px; width: 100px; color: rgb(0, 0, 0); font-size: 12px;"><option value="both" selected="selected">Both</option><option value="right">Right</option><option value="left">Left</option></select></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">y-Offset</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Semispan</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="4.0000"></div><hr class="HorizontalRule"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Mount Angle (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Washout (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Sweep (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Dihedral (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><hr class="HorizontalRule"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Root Chord</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 100px;">Tip Chord</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1.0000"></div><div class="Panel Collapsible collapsed"><div class="Static"><div class="Button"></div><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Root Airfoil</span></div><div class="Content"><br class="Break"><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Airfoil (graphics only)</span><input class="Input" style="padding: 2px; border: 1px solid transparent; width: 100px; color: rgb(68, 68, 68); font-size: 12px;" value="NACA 2412"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift Alpha (rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0369"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Lift Slope (1/rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="6.2832"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift Cm</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0527"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Moment Slope (1/rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0800"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift CD</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0055"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CD,L</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0045"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CD,L^2</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0100"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Max Lift Coefficient</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1.4000"></div><br class="Break"></div></div><div class="Panel Collapsible collapsed" style="margin-bottom: -8px;"><div class="Static"><div class="Button"></div><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Tip Airfoil</span></div><div class="Content"><div class="Row" style="width: 300px; margin-top: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Same as Root</span><input class="Checkbox" type="checkbox" checked="checked"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Airfoil (graphics only)</span><input class="Input" style="padding: 2px; border: 1px solid transparent; width: 100px; color: rgb(68, 68, 68); font-size: 12px;" value="NACA 2412"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift Alpha (rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0369"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Lift Slope (1/rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="6.2832"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift Cm</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0527"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Moment Slope (1/rad)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0800"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Zero-Lift CD</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0055"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CD,L</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="-0.0045"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CD,L^2</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0100"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Max Lift Coefficient</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1.4000"></div></div></div><hr class="HorizontalRule"><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Spanwise Segments</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="40"></div><div class="Row" style="width: 300px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Airfoil Segments</span><select class="Select" style="padding: 2px; width: 80px; color: rgb(68, 68, 68); font-size: 12px;"><option value="50" selected="selected">50</option><option value="100">100</option><option value="200">200</option></select></div><div class="Panel Collapsible collapsed"><div class="Static"><div class="Button"></div><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Control Surface</span></div><div class="Content"><br class="Break"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Has control surface</span><input class="Checkbox" type="checkbox"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Root/Span</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.2000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Tip/Span</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.8000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">C_f (root)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.2000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">C_f (tip)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.2000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Elevator Mix</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1.0000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Rudder Mix</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Aileron Mix</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="width: 300px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Flap Mix</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div></div></div></div></span></div></span><span style="display: none;"><div class="Panel" style="border-top: 0px none; padding-top: 20px; display: none;"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Color</span><input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#ffffff"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Emissive</span><input class="Color" style="width: 64px; height: 17px; border: 0px none; padding: 2px; background-color: transparent;" type="color" value="#000000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Shininess</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="30.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Side</span><select class="Select" style="padding: 2px; width: 150px; font-size: 12px;"><option value="0">Front</option><option value="1">Back</option><option value="2" selected="selected">Double</option></select></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Opacity</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 60px;" value="1.0000"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Wireframe</span><input class="Checkbox" type="checkbox"><input class="Number" style="background-color: transparent; cursor: col-resize; width: 60px;" value="1.0000"></div></div></span></span><div class="Panel Collapsible collapsed" style="display: none;"><div class="Static"><div class="Button"></div><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; text-transform: uppercase;">Animation</span></div><div class="Content"><br class="Break"><div class="Row"></div></div></div></span><span style="display: none;"><div class="Panel" style="border-top: 0px none; padding-top: 20px;"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Units</span><select class="Select" style="padding: 2px; width: 100px; color: rgb(0, 0, 0); font-size: 12px;"><option value="English" selected="selected">English</option><option value="SI">SI</option></select></div><div class="Row"><hr class="HorizontalRule"><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Velocity (ft/s)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="10.0000"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Density (slugs/ft^3)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0024"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Angle of Attack (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Sideslip (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><hr class="HorizontalRule"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Control Surfaces</span><br class="Break"><hr class="HorizontalRule"><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Elevator (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Rudder (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Aileron (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Flap (deg)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="0.0000"></div><hr class="HorizontalRule"></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Propeller</span><br class="Break"><hr class="HorizontalRule"><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Rotation Rate (rpm)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="1800"></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Throttle (%)</span><input class="Number" style="background-color: transparent; cursor: col-resize;" value="100"></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Individual Control</span><input class="Checkbox" type="checkbox"></div></div><hr class="HorizontalRule"></div></span><span style="display: none;"><div class="Panel" style="border-top: 0px none; padding-top: 20px;"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 80px;">Run</span><select class="Select" style="padding: 2px; width: 175px; color: rgb(0, 0, 0); font-size: 12px;"><option value="forces" selected="selected">Forces and Moments</option><option value="derivatives">Performance Derivatives</option><option value="aerocenter">Aerodynamic Center</option><option value="stallonset">Stall Onset</option><option value="stallairspeed">Stall Airspeed</option><option value="targetl">Target Lift</option><option value="pitchtrim">Pitch Trim</option><option value="distributions">Distributions</option></select></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Target Lift</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 70px;" value="0.0000"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Target Moment</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 70px;" value="0.0000"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lb-ft</span></div><div class="Row" style="display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Weight</span><input class="Number" style="background-color: transparent; cursor: col-resize; width: 70px;" value="10.0000"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><hr class="HorizontalRule"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 10px;"></span><button class="Button">Update Results</button><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 5px;"></span><button class="Button">Save Results</button></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Reference Area</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 50px; color: rgb(136, 136, 136); font-size: 12px;">0.0000</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">ft^2</span></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Longitudinal Length</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 50px; color: rgb(136, 136, 136); font-size: 12px;">0.0000</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 25px;">ft</span></div><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Lateral Length</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 50px; color: rgb(136, 136, 136); font-size: 12px;">0.0000</span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 25px;">ft</span></div><hr class="HorizontalRule"><div class="Row" style=""><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Lifting Surface Results</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Lift = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Drag = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">L/D = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div></div><div class="Row" style=""><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Prop Results</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Thrust = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Torque = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lb-ft</span></div></div><div class="Row" style=""><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">Total Results</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">FL = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">FD = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">FS = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">MX = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lb-ft</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">MY = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lb-ft</span></div><div class="Row" style="margin-left: 10px;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">MZ = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lb-ft</span></div></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">      All Units = 1/rad</span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CL,alpha = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CD,alpha = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Cm,alpha = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">CS,beta = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Cl,beta = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Cn,beta = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Static Margin = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">x = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">z = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Stall Airspeed = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">ft/s</span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Angle of Attack = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">deg</span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Lift = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">lbs</span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Stalled Wing = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">Span Location (%) = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">alpha (deg) = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div><div class="Row" style="margin-left: 10px; display: none;"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 140px;">elevator (deg) = </span><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 75px; color: rgb(136, 136, 136); font-size: 12px;"></span></div></div><div class="Panel" style="border-top: 0px none; padding-top: 20px;"></div></span><span style="display: none;"><div class="Panel" style="border-top: 0px none; padding-top: 20px;"><div class="Row"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; width: 90px;">Theme</span><select class="Select" style="padding: 2px; width: 150px;"><option value="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/css/light.css" selected="selected">light</option><option value="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/css/dark.css">dark</option></select></div></div><div class="Panel"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle;">HISTORY</span><span style="margin-right: 10px; position: absolute; right: 8px;"><input class="Checkbox" type="checkbox"><span class="Text" style="cursor: default; display: inline-block; vertical-align: middle; margin-left: 3px;">persistent</span></span><br class="Break"><br class="Break"><div class="Outliner" tabindex="0"><div class="option active">&nbsp;Add Object: Wing_1</div></div></div></span></div><div style="position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center;"><div class="Panel" style="width: 200px; padding: 20px; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;"></div></div></div>
-<link href="MachUp_files/main.css" rel="stylesheet">
-<link id="theme" href="MachUp_files/light.css" rel="stylesheet">
-<link rel="stylesheet" href="MachUp_files/codemirror.css">
+    <script src="MachUp_files/SceneLoader.js"></script>
 
-<script src="MachUp_files/jquery.js"></script>
-<script src="MachUp_files/jquery_002.js"></script>
+    <script src="MachUp_files/Projector.js"></script>
+    <script src="MachUp_files/CanvasRenderer.js"></script>
+    <script src="MachUp_files/RaytracingRenderer.js"></script>
+    <script src="MachUp_files/SoftwareRenderer.js"></script>
+    <script src="MachUp_files/SVGRenderer.js"></script>
 
-<script src="MachUp_files/three.js"></script>
-<script src="MachUp_files/system.js"></script>
-<script src="MachUp_files/MU.js"></script>
+    <script src="MachUp_files/codemirror.js"></script>
 
+    <script src="MachUp_files/signals.js"></script>
+    <script src="MachUp_files/ui_002.js"></script>
+    <script src="MachUp_files/ui.js"></script>
 
-<script src="MachUp_files/EditorControls.js"></script>
-<script src="MachUp_files/TransformControls.js"></script>
+    <script src="MachUp_files/app.js"></script>
+    <script src="MachUp_files/Player.js"></script>
+    <!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Script.js"></script> -->
 
-<script src="MachUp_files/AWDLoader.js"></script>
-<script src="MachUp_files/BabylonLoader.js"></script>
-<script src="MachUp_files/ColladaLoader2.js"></script>
-<script src="MachUp_files/OBJLoader.js"></script>
-<script src="MachUp_files/PLYLoader.js"></script>
-<script src="MachUp_files/STLLoader.js"></script>
-<script src="MachUp_files/UTF8Loader.js"></script>
-<script src="MachUp_files/VRMLLoader.js"></script>
-<script src="MachUp_files/lzma.js"></script>
-<script src="MachUp_files/ctm.js"></script>
-<script src="MachUp_files/CTMLoader.js"></script>
-<script src="MachUp_files/OBJExporter.js"></script>
-<script src="MachUp_files/STLExporter.js"></script>
+    <script src="MachUp_files/Storage.js"></script>
 
-<script src="MachUp_files/SceneLoader.js"></script>
+    <script src="MachUp_files/Editor.js"></script>
+    <script src="MachUp_files/Config.js"></script>
+    <script src="MachUp_files/History.js"></script>
+    <script src="MachUp_files/Loader.js"></script>
+    <script src="MachUp_files/Menubar_004.js"></script>
+    <script src="MachUp_files/Menubar_010.js"></script>
+    <script src="MachUp_files/Menubar_003.js"></script>
+    <script src="MachUp_files/Menubar_009.js"></script>
+    <script src="MachUp_files/Menubar_005.js"></script>
+    <!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.Play.js"></script> -->
+    <!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.View.js"></script> -->
+    <!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.Examples.js"></script> -->
+    <script src="MachUp_files/Menubar_002.js"></script>
+    <script src="MachUp_files/Menubar_008.js"></script>
+    <script src="MachUp_files/Menubar_007.js"></script>
+    <script src="MachUp_files/Menubar.js"></script>
+    <script src="MachUp_files/Menubar_006.js"></script>
+    <script src="MachUp_files/Sidebar_021.js"></script>
+    <script src="MachUp_files/Sidebar_025.js"></script>
+    <script src="MachUp_files/Sidebar.js"></script>
 
-<script src="MachUp_files/Projector.js"></script>
-<script src="MachUp_files/CanvasRenderer.js"></script>
-<script src="MachUp_files/RaytracingRenderer.js"></script>
-<script src="MachUp_files/SoftwareRenderer.js"></script>
-<script src="MachUp_files/SVGRenderer.js"></script>
+    <script src="MachUp_files/Sidebar_011.js"></script>
+    <script src="MachUp_files/Sidebar_018.js"></script>
+    <script src="MachUp_files/Sidebar_026.js"></script>
+    <script src="MachUp_files/Sidebar_006.js"></script>
+    <script src="MachUp_files/Sidebar_003.js"></script>
+    <script src="MachUp_files/Sidebar_016.js"></script>
+    <script src="MachUp_files/Sidebar_024.js"></script>
+    <script src="MachUp_files/Sidebar_005.js"></script>
+    <script src="MachUp_files/Sidebar_008.js"></script>
+    <script src="MachUp_files/Sidebar_015.js"></script>
+    <script src="MachUp_files/Sidebar_022.js"></script>
+    <script src="MachUp_files/Sidebar_020.js"></script>
+    <script src="MachUp_files/Sidebar_023.js"></script>
+    <script src="MachUp_files/Sidebar_004.js"></script>
+    <script src="MachUp_files/Sidebar_009.js"></script>
+    <script src="MachUp_files/Sidebar_019.js"></script>
+    <script src="MachUp_files/Sidebar_014.js"></script>
+    <script src="MachUp_files/Sidebar_002.js"></script>
+    <script src="MachUp_files/Sidebar_012.js"></script>
+    <!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Sidebar.Geometry.TorusKnotGeometry.js"></script> -->
+    <script src="MachUp_files/Sidebar_013.js"></script>
+    <script src="MachUp_files/Sidebar_007.js"></script>
+    <script src="MachUp_files/Sidebar_010.js"></script>
+    <script src="MachUp_files/Sidebar_017.js"></script>
+    <script src="MachUp_files/Toolbar.js"></script>
+    <script src="MachUp_files/Viewport.js"></script>
+    <script src="MachUp_files/Viewport_002.js"></script>
 
-<script src="MachUp_files/codemirror.js"></script>
+    <script src="MachUp_files/Command.js"></script>
+    <script src="MachUp_files/AddObjectCommand.js"></script>
+    <script src="MachUp_files/RemoveObjectCommand.js"></script>
+    <script src="MachUp_files/MoveObjectCommand.js"></script>
+    <script src="MachUp_files/SetPositionCommand.js"></script>
+    <script src="MachUp_files/SetRotationCommand.js"></script>
+    <script src="MachUp_files/SetScaleCommand.js"></script>
+    <script src="MachUp_files/SetValueCommand.js"></script>
+    <script src="MachUp_files/SetUuidCommand.js"></script>
+    <script src="MachUp_files/SetColorCommand.js"></script>
+    <script src="MachUp_files/SetGeometryCommand.js"></script>
+    <script src="MachUp_files/SetGeometryValueCommand.js"></script>
+    <script src="MachUp_files/MultiCmdsCommand.js"></script>
+    <script src="MachUp_files/AddScriptCommand.js"></script>
+    <script src="MachUp_files/RemoveScriptCommand.js"></script>
+    <script src="MachUp_files/SetScriptValueCommand.js"></script>
+    <script src="MachUp_files/SetMaterialCommand.js"></script>
+    <script src="MachUp_files/SetMaterialValueCommand.js"></script>
+    <script src="MachUp_files/SetMaterialColorCommand.js"></script>
+    <script src="MachUp_files/SetMaterialMapCommand.js"></script>
+    <script src="MachUp_files/SetSceneCommand.js"></script>
 
-<script src="MachUp_files/signals.js"></script>
-<script src="MachUp_files/ui_002.js"></script>
-<script src="MachUp_files/ui.js"></script>
+    <!-- <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="qyqgfqd9j8z890t"></script> -->
 
-<script src="MachUp_files/app.js"></script>
-<script src="MachUp_files/Player.js"></script>
-<!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Script.js"></script> -->
+    <script>
+      var machupdiv = document.getElementById("machup") // DFH
 
-<script src="MachUp_files/Storage.js"></script>
+      window.URL = window.URL || window.webkitURL
+      window.BlobBuilder =
+        window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder
 
-<script src="MachUp_files/Editor.js"></script>
-<script src="MachUp_files/Config.js"></script>
-<script src="MachUp_files/History.js"></script>
-<script src="MachUp_files/Loader.js"></script>
-<script src="MachUp_files/Menubar_004.js"></script>
-<script src="MachUp_files/Menubar_010.js"></script>
-<script src="MachUp_files/Menubar_003.js"></script>
-<script src="MachUp_files/Menubar_009.js"></script>
-<script src="MachUp_files/Menubar_005.js"></script>
-<!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.Play.js"></script> -->
-<!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.View.js"></script> -->
-<!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Menubar.Examples.js"></script> -->
-<script src="MachUp_files/Menubar_002.js"></script>
-<script src="MachUp_files/Menubar_008.js"></script>
-<script src="MachUp_files/Menubar_007.js"></script>
-<script src="MachUp_files/Menubar.js"></script>
-<script src="MachUp_files/Menubar_006.js"></script>
-<script src="MachUp_files/Sidebar_021.js"></script>
-<script src="MachUp_files/Sidebar_025.js"></script>
-<script src="MachUp_files/Sidebar.js"></script>
-
-<script src="MachUp_files/Sidebar_011.js"></script>
-<script src="MachUp_files/Sidebar_018.js"></script>
-<script src="MachUp_files/Sidebar_026.js"></script>
-<script src="MachUp_files/Sidebar_006.js"></script>
-<script src="MachUp_files/Sidebar_003.js"></script>
-<script src="MachUp_files/Sidebar_016.js"></script>
-<script src="MachUp_files/Sidebar_024.js"></script>
-<script src="MachUp_files/Sidebar_005.js"></script>
-<script src="MachUp_files/Sidebar_008.js"></script>
-<script src="MachUp_files/Sidebar_015.js"></script>
-<script src="MachUp_files/Sidebar_022.js"></script>
-<script src="MachUp_files/Sidebar_020.js"></script>
-<script src="MachUp_files/Sidebar_023.js"></script>
-<script src="MachUp_files/Sidebar_004.js"></script>
-<script src="MachUp_files/Sidebar_009.js"></script>
-<script src="MachUp_files/Sidebar_019.js"></script>
-<script src="MachUp_files/Sidebar_014.js"></script>
-<script src="MachUp_files/Sidebar_002.js"></script>
-<script src="MachUp_files/Sidebar_012.js"></script>
-<!-- <script src="http://aero.go.usu.edu/wp-content/themes/aperture-child/MachUp/gui/V5.0/js/Sidebar.Geometry.TorusKnotGeometry.js"></script> -->
-<script src="MachUp_files/Sidebar_013.js"></script>
-<script src="MachUp_files/Sidebar_007.js"></script>
-<script src="MachUp_files/Sidebar_010.js"></script>
-<script src="MachUp_files/Sidebar_017.js"></script>
-<script src="MachUp_files/Toolbar.js"></script>
-<script src="MachUp_files/Viewport.js"></script>
-<script src="MachUp_files/Viewport_002.js"></script>
-
-<script src="MachUp_files/Command.js"></script>
-<script src="MachUp_files/AddObjectCommand.js"></script>
-<script src="MachUp_files/RemoveObjectCommand.js"></script>
-<script src="MachUp_files/MoveObjectCommand.js"></script>
-<script src="MachUp_files/SetPositionCommand.js"></script>
-<script src="MachUp_files/SetRotationCommand.js"></script>
-<script src="MachUp_files/SetScaleCommand.js"></script>
-<script src="MachUp_files/SetValueCommand.js"></script>
-<script src="MachUp_files/SetUuidCommand.js"></script>
-<script src="MachUp_files/SetColorCommand.js"></script>
-<script src="MachUp_files/SetGeometryCommand.js"></script>
-<script src="MachUp_files/SetGeometryValueCommand.js"></script>
-<script src="MachUp_files/MultiCmdsCommand.js"></script>
-<script src="MachUp_files/AddScriptCommand.js"></script>
-<script src="MachUp_files/RemoveScriptCommand.js"></script>
-<script src="MachUp_files/SetScriptValueCommand.js"></script>
-<script src="MachUp_files/SetMaterialCommand.js"></script>
-<script src="MachUp_files/SetMaterialValueCommand.js"></script>
-<script src="MachUp_files/SetMaterialColorCommand.js"></script>
-<script src="MachUp_files/SetMaterialMapCommand.js"></script>
-<script src="MachUp_files/SetSceneCommand.js"></script>
-
-<!-- <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="qyqgfqd9j8z890t"></script> -->
-
-<script>
-
-  var machupdiv = document.getElementById('machup'); // DFH
-
-  window.URL = window.URL || window.webkitURL;
-  window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
-
-  Number.prototype.format = function (){
-    return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-  };
-
-  //
-
-  var editor = new Editor();
-
-  var viewport = new Viewport( editor );
-  machupdiv.appendChild( viewport.dom ); // DFH
-
-//  var script = new Script( editor );
-//  machupdiv.appendChild( script.dom );
-
-  var player = new Player( editor );
-  machupdiv.appendChild( player.dom ); // DFH
-
-  var toolbar = new Toolbar( editor );
-  machupdiv.appendChild( toolbar.dom ); // DFH
-
-  var menubar = new Menubar( editor );
-  machupdiv.appendChild( menubar.dom ); // DFH
-
-  var sidebar = new Sidebar( editor );
-  machupdiv.appendChild( sidebar.dom ); // DFH
-
-  var modal = new UI.Modal();
-  machupdiv.appendChild( modal.dom ); // DFH
-
-  //
-
-  editor.setTheme( editor.config.getKey( 'theme' ) );
-
-  editor.storage.init( function () {
-
-    editor.storage.get( function ( state ) {
-
-      if ( isLoadingFromHash ) return;
-
-      if ( state !== undefined ) {
-
-        editor.fromJSON( state );
-
-      } else {
-
-      	// Add CG // DFH
-      	var radius = 0.1;
-      	var widthSegments = 32;
-      	var heightSegments = 16;
-      	var phiStart = 0;
-      	var phiLength = Math.PI * 2;
-      	var thetaStart = 0;
-      	var thetaLength = Math.PI;
-
-      	var geometry = new THREE.SphereBufferGeometry( radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength );
-      	var mesh = new THREE.Mesh( geometry, new THREE.MeshStandardMaterial() );
-      	mesh.name = 'Center of Gravity';
-      	mesh.material.color.setHex( '0xFF0000' );
-      	mesh.material.emissive.setHex( '0xFF0000' );
-
-      	editor.execute( new AddObjectCommand( mesh ) );
-        //editor.select( mesh );
-
-      	// Add Aero Center
-      	radius = 0.1;
-      	widthSegments = 32;
-      	heightSegments = 16;
-      	phiStart = 0;
-      	phiLength = Math.PI * 2;
-      	thetaStart = 0;
-      	thetaLength = Math.PI;
-
-      	geometry = new THREE.SphereBufferGeometry( radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength );
-      	mesh = new THREE.Mesh( geometry, new THREE.MeshStandardMaterial() );
-      	mesh.name = 'Aerodynamic Center';
-      	mesh.material.color.setHex( '0x6600FF' );
-      	mesh.material.emissive.setHex( '0x6600FF' );
-      	mesh.visible = false;
-
-      	editor.execute( new AddObjectCommand( mesh ) );
-      	//editor.select( mesh );
-
-      	//Add Point Light
-        var color = 0xffffff;
-        var intensity = 1;
-        var distance = 0;
-
-        var light = new THREE.PointLight( color, intensity, distance );
-        light.name = 'PointLight';
-
-        light.position.set( 0.5, 0.5, -1 ).multiplyScalar( 20 );
-
-        editor.execute( new AddObjectCommand( light ) );
-      	//editor.select( light );
-
-        editor.select( editor.scene ); // DFH
-
+      Number.prototype.format = function () {
+        return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
       }
 
-      var selected = editor.config.getKey( 'selected' );
+      //
 
-      if ( selected !== undefined ) {
+      var editor = new Editor()
 
-        editor.selectByUuid( selected );
+      var viewport = new Viewport(editor)
+      machupdiv.appendChild(viewport.dom) // DFH
 
-      }
+      //  var script = new Script( editor );
+      //  machupdiv.appendChild( script.dom );
 
-      var selected = editor.config.getKey( 'selected' );
+      var player = new Player(editor)
+      machupdiv.appendChild(player.dom) // DFH
 
-	    if ( selected !== undefined ) {
+      var toolbar = new Toolbar(editor)
+      machupdiv.appendChild(toolbar.dom) // DFH
 
-        editor.selectByUuid( selected );
+      var menubar = new Menubar(editor)
+      machupdiv.appendChild(menubar.dom) // DFH
 
-      }
+      var sidebar = new Sidebar(editor)
+      machupdiv.appendChild(sidebar.dom) // DFH
 
-    } );
+      var modal = new UI.Modal()
+      machupdiv.appendChild(modal.dom) // DFH
 
-    //
+      //
 
-    var timeout;
+      editor.setTheme(editor.config.getKey("theme"))
 
-    function saveState( scene ) {
+      editor.storage.init(function () {
+        editor.storage.get(function (state) {
+          if (isLoadingFromHash) return
 
-      if ( editor.config.getKey( 'autosave' ) === false ) {
+          if (state !== undefined) {
+            editor.fromJSON(state)
+          } else {
+            // Add CG // DFH
+            var radius = 0.1
+            var widthSegments = 32
+            var heightSegments = 16
+            var phiStart = 0
+            var phiLength = Math.PI * 2
+            var thetaStart = 0
+            var thetaLength = Math.PI
 
-        return;
+            var geometry = new THREE.SphereBufferGeometry(
+              radius,
+              widthSegments,
+              heightSegments,
+              phiStart,
+              phiLength,
+              thetaStart,
+              thetaLength
+            )
+            var mesh = new THREE.Mesh(
+              geometry,
+              new THREE.MeshStandardMaterial()
+            )
+            mesh.name = "Center of Gravity"
+            mesh.material.color.setHex("0xFF0000")
+            mesh.material.emissive.setHex("0xFF0000")
 
-      }
+            editor.execute(new AddObjectCommand(mesh))
+            //editor.select( mesh );
 
-      clearTimeout( timeout );
+            // Add Aero Center
+            radius = 0.1
+            widthSegments = 32
+            heightSegments = 16
+            phiStart = 0
+            phiLength = Math.PI * 2
+            thetaStart = 0
+            thetaLength = Math.PI
 
-      timeout = setTimeout( function () {
+            geometry = new THREE.SphereBufferGeometry(
+              radius,
+              widthSegments,
+              heightSegments,
+              phiStart,
+              phiLength,
+              thetaStart,
+              thetaLength
+            )
+            mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial())
+            mesh.name = "Aerodynamic Center"
+            mesh.material.color.setHex("0x6600FF")
+            mesh.material.emissive.setHex("0x6600FF")
+            mesh.visible = false
 
-        editor.signals.savingStarted.dispatch();
+            editor.execute(new AddObjectCommand(mesh))
+            //editor.select( mesh );
 
-        timeout = setTimeout( function () {
+            //Add Point Light
+            var color = 0xffffff
+            var intensity = 1
+            var distance = 0
 
-          editor.storage.set( editor.toJSON() );
+            var light = new THREE.PointLight(color, intensity, distance)
+            light.name = "PointLight"
 
-          editor.signals.savingFinished.dispatch();
+            light.position.set(0.5, 0.5, -1).multiplyScalar(20)
 
-        }, 100 );
+            editor.execute(new AddObjectCommand(light))
+            //editor.select( light );
 
-      }, 1000 );
+            editor.select(editor.scene) // DFH
+          }
 
-    };
+          var selected = editor.config.getKey("selected")
 
-    var signals = editor.signals;
+          if (selected !== undefined) {
+            editor.selectByUuid(selected)
+          }
 
-    signals.geometryChanged.add( saveState );
-    signals.objectAdded.add( saveState );
-    signals.objectChanged.add( saveState );
-    signals.objectRemoved.add( saveState );
-    signals.materialChanged.add( saveState );
-    signals.sceneBackgroundChanged.add( saveState );
-    signals.sceneFogChanged.add( saveState );
-    signals.sceneGraphChanged.add( saveState );
-    signals.scriptChanged.add( saveState );
-    signals.historyChanged.add( saveState );
+          var selected = editor.config.getKey("selected")
 
-    signals.showModal.add( function ( content ) {
+          if (selected !== undefined) {
+            editor.selectByUuid(selected)
+          }
+        })
 
-      modal.show( content );
+        //
 
-    } );
+        var timeout
 
-  } );
+        function saveState(scene) {
+          if (editor.config.getKey("autosave") === false) {
+            return
+          }
 
-  //
+          clearTimeout(timeout)
 
-  document.addEventListener( 'dragover', function ( event ) {
+          timeout = setTimeout(function () {
+            editor.signals.savingStarted.dispatch()
 
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy';
+            timeout = setTimeout(function () {
+              editor.storage.set(editor.toJSON())
 
-  }, false );
-
-  document.addEventListener( 'drop', function ( event ) {
-
-    event.preventDefault();
-
-    if ( event.dataTransfer.files.length > 0 ) {
-
-      editor.loader.loadFile( event.dataTransfer.files[ 0 ] );
-
-    }
-
-  }, false );
-
-  document.addEventListener( 'keydown', function ( event ) {
-
-    switch ( event.keyCode ) {
-
-      case 8: // backspace
-
-        event.preventDefault(); // prevent browser back
-        var object = editor.selected; // DFH
-
-        if ( confirm( 'Delete ' + object.name + ' and dependents?' ) === false ) return; // DFH
-        if ( object.name === 'Center of Gravity'  || object.name === 'Aerodynamic Center' ) return; // DFH avoid deleting the CG Sphere
-
-        var parent = object.parent; // DFH
-        if ( parent !== null ) editor.execute( new RemoveObjectCommand( object ) ); // DFH
-
-      case 46: // delete
-
-        var object = editor.selected;
-
-        if ( confirm( 'Delete ' + object.name + ' and dependents?' ) === false ) return;
-        if ( object.name === 'Center of Gravity'  || object.name === 'Aerodynamic Center' ) return; // DFH avoid deleting the CG Sphere
-
-        var parent = object.parent;
-        if ( parent !== null ) editor.execute( new RemoveObjectCommand( object ) );
-
-        break;
-
-      case 90: // Register Ctrl-Z for Undo, Ctrl-Shift-Z for Redo
-
-        if ( event.ctrlKey && event.shiftKey ) {
-
-          editor.redo();
-
-        } else if ( event.ctrlKey ) {
-
-          editor.undo();
-
+              editor.signals.savingFinished.dispatch()
+            }, 100)
+          }, 1000)
         }
 
-        break;
+        var signals = editor.signals
 
-      case 84: // Register T for translation transform mode
+        signals.geometryChanged.add(saveState)
+        signals.objectAdded.add(saveState)
+        signals.objectChanged.add(saveState)
+        signals.objectRemoved.add(saveState)
+        signals.materialChanged.add(saveState)
+        signals.sceneBackgroundChanged.add(saveState)
+        signals.sceneFogChanged.add(saveState)
+        signals.sceneGraphChanged.add(saveState)
+        signals.scriptChanged.add(saveState)
+        signals.historyChanged.add(saveState)
 
-        editor.signals.transformModeChanged.dispatch( 'translate' );
+        signals.showModal.add(function (content) {
+          modal.show(content)
+        })
+      })
 
-        break;
+      //
 
-      case 82: // Register R for rotation transform mode
+      document.addEventListener(
+        "dragover",
+        function (event) {
+          event.preventDefault()
+          event.dataTransfer.dropEffect = "copy"
+        },
+        false
+      )
 
-        editor.signals.transformModeChanged.dispatch( 'rotate' );
+      document.addEventListener(
+        "drop",
+        function (event) {
+          event.preventDefault()
 
-        break;
+          if (event.dataTransfer.files.length > 0) {
+            editor.loader.loadFile(event.dataTransfer.files[0])
+          }
+        },
+        false
+      )
 
-      case 83: // Register S for scaling transform mode
+      document.addEventListener(
+        "keydown",
+        function (event) {
+          switch (event.keyCode) {
+            case 8: // backspace
+              event.preventDefault() // prevent browser back
+              var object = editor.selected // DFH
 
-        editor.signals.transformModeChanged.dispatch( 'scale' );
+              if (
+                confirm("Delete " + object.name + " and dependents?") === false
+              )
+                return // DFH
+              if (
+                object.name === "Center of Gravity" ||
+                object.name === "Aerodynamic Center"
+              )
+                return // DFH avoid deleting the CG Sphere
 
-        break;
+              var parent = object.parent // DFH
+              if (parent !== null)
+                editor.execute(new RemoveObjectCommand(object)) // DFH
 
-    }
+            case 46: // delete
+              var object = editor.selected
 
-  }, false );
+              if (
+                confirm("Delete " + object.name + " and dependents?") === false
+              )
+                return
+              if (
+                object.name === "Center of Gravity" ||
+                object.name === "Aerodynamic Center"
+              )
+                return // DFH avoid deleting the CG Sphere
 
-  function onWindowResize( event ) {
+              var parent = object.parent
+              if (parent !== null)
+                editor.execute(new RemoveObjectCommand(object))
 
-    editor.signals.windowResize.dispatch();
+              break
 
-  }
+            case 90: // Register Ctrl-Z for Undo, Ctrl-Shift-Z for Redo
+              if (event.ctrlKey && event.shiftKey) {
+                editor.redo()
+              } else if (event.ctrlKey) {
+                editor.undo()
+              }
 
-  window.addEventListener( 'resize', onWindowResize, false );
+              break
 
-  onWindowResize();
+            case 84: // Register T for translation transform mode
+              editor.signals.transformModeChanged.dispatch("translate")
 
-  //
+              break
 
-  var isLoadingFromHash = false;
-  var hash = window.location.hash;
+            case 82: // Register R for rotation transform mode
+              editor.signals.transformModeChanged.dispatch("rotate")
 
-  if ( hash.substr( 1, 5 ) === 'file=' ) {
+              break
 
-    var file = hash.substr( 6 );
+            case 83: // Register S for scaling transform mode
+              editor.signals.transformModeChanged.dispatch("scale")
 
-    if ( confirm( 'Any unsaved data will be lost. Are you sure?' ) ) {
+              break
+          }
+        },
+        false
+      )
 
-      var loader = new THREE.FileLoader();
-      loader.crossOrigin = '';
-      loader.load( file, function ( text ) {
+      function onWindowResize(event) {
+        editor.signals.windowResize.dispatch()
+      }
 
-        editor.clear();
-        editor.fromJSON( JSON.parse( text ) );
+      window.addEventListener("resize", onWindowResize, false)
 
-      } );
+      onWindowResize()
 
-      isLoadingFromHash = true;
+      //
 
-    }
+      var isLoadingFromHash = false
+      var hash = window.location.hash
 
-  }
+      if (hash.substr(1, 5) === "file=") {
+        var file = hash.substr(6)
 
-  /*
+        if (confirm("Any unsaved data will be lost. Are you sure?")) {
+          var loader = new THREE.FileLoader()
+          loader.crossOrigin = ""
+          loader.load(file, function (text) {
+            editor.clear()
+            editor.fromJSON(JSON.parse(text))
+          })
+
+          isLoadingFromHash = true
+        }
+      }
+
+      /*
   window.addEventListener( 'message', function ( event ) {
 
     editor.clear();
@@ -530,80 +3489,72 @@
   }, false );
   */
 
-  // VR
+      // VR
 
-  var groupVR;
+      var groupVR
 
-  // TODO: Use editor.signals.enteredVR (WebVR 1.0)
+      // TODO: Use editor.signals.enteredVR (WebVR 1.0)
 
-  editor.signals.enterVR.add( function () {
+      editor.signals.enterVR.add(function () {
+        if (groupVR === undefined) {
+          groupVR = new THREE.HTMLGroup(viewport.dom)
+          editor.sceneHelpers.add(groupVR)
 
-    if ( groupVR === undefined ) {
+          var mesh = new THREE.HTMLMesh(sidebar.dom)
+          mesh.position.set(15, 0, 15)
+          mesh.rotation.y = -0.5
+          groupVR.add(mesh)
 
-      groupVR = new THREE.HTMLGroup( viewport.dom );
-      editor.sceneHelpers.add( groupVR );
+          var signals = editor.signals
 
-      var mesh = new THREE.HTMLMesh( sidebar.dom );
-      mesh.position.set( 15, 0, 15 );
-      mesh.rotation.y = - 0.5;
-      groupVR.add( mesh );
+          function updateTexture() {
+            mesh.material.map.update()
+          }
 
-      var signals = editor.signals;
+          signals.objectSelected.add(updateTexture)
+          signals.objectAdded.add(updateTexture)
+          signals.objectChanged.add(updateTexture)
+          signals.objectRemoved.add(updateTexture)
+          signals.sceneGraphChanged.add(updateTexture)
+          signals.historyChanged.add(updateTexture)
+        }
 
-      function updateTexture() {
+        groupVR.visible = true
+      })
 
-        mesh.material.map.update();
+      editor.signals.exitedVR.add(function () {
+        if (groupVR !== undefined) groupVR.visible = false
+      })
+    </script>
+    <a style="display: none"></a>
 
-      }
-
-      signals.objectSelected.add( updateTexture );
-      signals.objectAdded.add( updateTexture );
-      signals.objectChanged.add( updateTexture );
-      signals.objectRemoved.add( updateTexture );
-      signals.sceneGraphChanged.add( updateTexture );
-      signals.historyChanged.add( updateTexture );
-
-    }
-
-    groupVR.visible = true;
-
-  } );
-
-  editor.signals.exitedVR.add( function () {
-
-    if ( groupVR !== undefined ) groupVR.visible = false;
-
-  } );
-
-</script><a style="display: none;"></a>
-
-<!-- Terms and Agreement pop-up box -->
-<div id="aboutModal" class="modal">
-	<div class="about-modal-content">
-    <span class="close" style="font-size: 16pt; float: right;">×</span>
-		<div id="choose-theme">
-      <h3>About MachUp</h3>
-      <p>
-        MachUp Version 5.0
-        <br>
-        © 2017 USU Aero Lab
-        <br>
-        <br>
-        THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, 
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-         MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-          LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN 
-AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
-CONNECTION
-           WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
-SOFTWARE.
-        <br>
-        <br>
-        Special Thanks to www.threejs.org upon which MIT-licensed framework this is built.
-      </p>
+    <!-- Terms and Agreement pop-up box -->
+    <div id="aboutModal" class="modal">
+      <div class="about-modal-content">
+        <span class="close" style="font-size: 16pt; float: right">×</span>
+        <div id="choose-theme">
+          <h3>About MachUp</h3>
+          <p>
+            MachUp Version 5.0
+            <br />
+            © 2017 USU Aero Lab
+            <br />
+            <br />
+            THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+            EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+            MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+            NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+            BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+            ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+            CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE.
+            <br />
+            <br />
+            Special Thanks to www.threejs.org upon which MIT-licensed framework
+            this is built.
+          </p>
+        </div>
+      </div>
     </div>
-	</div>
-</div>
-
-</body></html>
+  </body>
+</html>

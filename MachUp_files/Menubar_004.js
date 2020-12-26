@@ -16,7 +16,6 @@ var Menubar = function ( editor ) {
 	container.add( new Menubar.Settings( editor ) );
 	container.add( new Menubar.Tutorials( editor ) );
 	container.add( new Menubar.Help( editor ) );
-        container.add( new Menubar.PrintFoam( editor ) );
 
 	container.add( new Menubar.Status( editor ) );
 

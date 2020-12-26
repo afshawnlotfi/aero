@@ -92,7 +92,7 @@ var Editor = function () {
 
 	this.scene = new THREE.Scene();
 	this.scene.name = 'MyAirplane'; // DFH
-	this.scene.background = new THREE.Color( 0xaaaaaa );
+	this.scene.background = new THREE.Color( 0x000000 );
 
 	this.sceneHelpers = new THREE.Scene();
 
@@ -473,7 +473,7 @@ Editor.prototype = {
 		this.storage.clear();
 
 		this.camera.copy( this.DEFAULT_CAMERA );
-		this.scene.background.setHex( 0xaaaaaa );
+		this.scene.background.setHex( 0x000000 );
 		this.scene.fog = null;
 
 		var objects = this.scene.children;
