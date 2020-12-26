@@ -1365,7 +1365,8 @@ var runAnalysis = function (editor, callback) {
   data_str = data_str.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1")
   console.log(data_str)
 
-  var url= "/wp-content/themes/aperture-child/MachUp/analysis/V5.0/analysis.php/";
+  var url =
+    "/wp-content/themes/aperture-child/MachUp/analysis/V5.0/analysis.php/"
   $.ajax({
     type: "post",
     url: url,

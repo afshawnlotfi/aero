@@ -3,73 +3,74 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-THREE.STLExporter = function () {};
+THREE.STLExporter = function () {}
 
 THREE.STLExporter.prototype = {
+  constructor: THREE.STLExporter,
 
-	constructor: THREE.STLExporter,
+  parse: (function () {
+    var vector = new THREE.Vector3()
+    var normalMatrixWorld = new THREE.Matrix3()
 
-	parse: ( function () {
+    return function parse(scene) {
+      var output = ""
 
-		var vector = new THREE.Vector3();
-		var normalMatrixWorld = new THREE.Matrix3();
+      output += "solid exported\n"
 
-		return function parse( scene ) {
+      scene.traverse(function (object) {
+        if (object instanceof THREE.Mesh) {
+          var geometry = object.geometry
+          var matrixWorld = object.matrixWorld
 
-			var output = '';
+          if (geometry instanceof THREE.Geometry) {
+            var vertices = geometry.vertices
+            var faces = geometry.faces
 
-			output += 'solid exported\n';
+            normalMatrixWorld.getNormalMatrix(matrixWorld)
 
-			scene.traverse( function ( object ) {
+            for (var i = 0, l = faces.length; i < l; i++) {
+              var face = faces[i]
 
-				if ( object instanceof THREE.Mesh ) {
+              vector
+                .copy(face.normal)
+                .applyMatrix3(normalMatrixWorld)
+                .normalize()
 
-					var geometry = object.geometry;
-					var matrixWorld = object.matrixWorld;
+              output +=
+                "\tfacet normal " +
+                vector.x +
+                " " +
+                vector.y +
+                " " +
+                vector.z +
+                "\n"
+              output += "\t\touter loop\n"
 
-					if ( geometry instanceof THREE.Geometry ) {
+              var indices = [face.a, face.b, face.c]
 
-						var vertices = geometry.vertices;
-						var faces = geometry.faces;
+              for (var j = 0; j < 3; j++) {
+                vector.copy(vertices[indices[j]]).applyMatrix4(matrixWorld)
 
-						normalMatrixWorld.getNormalMatrix( matrixWorld );
+                output +=
+                  "\t\t\tvertex " +
+                  vector.x +
+                  " " +
+                  vector.y +
+                  " " +
+                  vector.z +
+                  "\n"
+              }
 
-						for ( var i = 0, l = faces.length; i < l; i ++ ) {
+              output += "\t\tendloop\n"
+              output += "\tendfacet\n"
+            }
+          }
+        }
+      })
 
-							var face = faces[ i ];
+      output += "endsolid exported\n"
 
-							vector.copy( face.normal ).applyMatrix3( normalMatrixWorld ).normalize();
-
-							output += '\tfacet normal ' + vector.x + ' ' + vector.y + ' ' + vector.z + '\n';
-							output += '\t\touter loop\n';
-
-							var indices = [ face.a, face.b, face.c ];
-
-							for ( var j = 0; j < 3; j ++ ) {
-
-								vector.copy( vertices[ indices[ j ] ] ).applyMatrix4( matrixWorld );
-
-								output += '\t\t\tvertex ' + vector.x + ' ' + vector.y + ' ' + vector.z + '\n';
-
-							}
-
-							output += '\t\tendloop\n';
-							output += '\tendfacet\n';
-
-						}
-
-					}
-
-				}
-
-			} );
-
-			output += 'endsolid exported\n';
-
-			return output;
-
-		};
-
-	}() )
-
-};
+      return output
+    }
+  })(),
+}

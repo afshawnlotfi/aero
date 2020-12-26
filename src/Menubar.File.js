@@ -146,9 +146,6 @@ Menubar.File = function (editor) {
 
   //
 
-
-
-
   var link = document.createElement("a")
   link.style.display = "none"
   document.body.appendChild(link) // Firefox workaround, see #6594

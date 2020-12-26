@@ -10,62 +10,51 @@
  * @constructor
  */
 
-var SetGeometryValueCommand = function ( object, attributeName, newValue ) {
+var SetGeometryValueCommand = function (object, attributeName, newValue) {
+  Command.call(this)
 
-	Command.call( this );
+  this.type = "SetGeometryValueCommand"
+  this.name = "Set Geometry." + attributeName
 
-	this.type = 'SetGeometryValueCommand';
-	this.name = 'Set Geometry.' + attributeName;
-
-	this.object = object;
-	this.attributeName = attributeName;
-	this.oldValue = ( object !== undefined ) ? object.geometry[ attributeName ] : undefined;
-	this.newValue = newValue;
-
-};
+  this.object = object
+  this.attributeName = attributeName
+  this.oldValue =
+    object !== undefined ? object.geometry[attributeName] : undefined
+  this.newValue = newValue
+}
 
 SetGeometryValueCommand.prototype = {
+  execute: function () {
+    this.object.geometry[this.attributeName] = this.newValue
+    this.editor.signals.objectChanged.dispatch(this.object)
+    this.editor.signals.geometryChanged.dispatch()
+    this.editor.signals.sceneGraphChanged.dispatch()
+  },
 
-	execute: function () {
+  undo: function () {
+    this.object.geometry[this.attributeName] = this.oldValue
+    this.editor.signals.objectChanged.dispatch(this.object)
+    this.editor.signals.geometryChanged.dispatch()
+    this.editor.signals.sceneGraphChanged.dispatch()
+  },
 
-		this.object.geometry[ this.attributeName ] = this.newValue;
-		this.editor.signals.objectChanged.dispatch( this.object );
-		this.editor.signals.geometryChanged.dispatch();
-		this.editor.signals.sceneGraphChanged.dispatch();
+  toJSON: function () {
+    var output = Command.prototype.toJSON.call(this)
 
-	},
+    output.objectUuid = this.object.uuid
+    output.attributeName = this.attributeName
+    output.oldValue = this.oldValue
+    output.newValue = this.newValue
 
-	undo: function () {
+    return output
+  },
 
-		this.object.geometry[ this.attributeName ] = this.oldValue;
-		this.editor.signals.objectChanged.dispatch( this.object );
-		this.editor.signals.geometryChanged.dispatch();
-		this.editor.signals.sceneGraphChanged.dispatch();
+  fromJSON: function (json) {
+    Command.prototype.fromJSON.call(this, json)
 
-	},
-
-	toJSON: function () {
-
-		var output = Command.prototype.toJSON.call( this );
-
-		output.objectUuid = this.object.uuid;
-		output.attributeName = this.attributeName;
-		output.oldValue = this.oldValue;
-		output.newValue = this.newValue;
-
-		return output;
-
-	},
-
-	fromJSON: function ( json ) {
-
-		Command.prototype.fromJSON.call( this, json );
-
-		this.object = this.editor.objectByUuid( json.objectUuid );
-		this.attributeName = json.attributeName;
-		this.oldValue = json.oldValue;
-		this.newValue = json.newValue;
-
-	}
-
-};
+    this.object = this.editor.objectByUuid(json.objectUuid)
+    this.attributeName = json.attributeName
+    this.oldValue = json.oldValue
+    this.newValue = json.newValue
+  },
+}

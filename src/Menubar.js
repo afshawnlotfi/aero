@@ -2,18 +2,16 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Menubar = function ( editor ) {
+var Menubar = function (editor) {
+  var container = new UI.Panel()
+  container.setId("menubar")
 
-	var container = new UI.Panel();
-	container.setId( 'menubar' );
+  container.add(new Menubar.File(editor))
+  container.add(new Menubar.Edit(editor))
+  container.add(new Menubar.Add(editor))
+  container.add(new Menubar.Settings(editor))
 
-	container.add( new Menubar.File( editor ) );
-	container.add( new Menubar.Edit( editor ) );
-	container.add( new Menubar.Add( editor ) );
-	container.add( new Menubar.Settings( editor ) );
+  container.add(new Menubar.Status(editor))
 
-	container.add( new Menubar.Status( editor ) );
-
-	return container;
-
-};
+  return container
+}

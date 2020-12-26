@@ -2,59 +2,51 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Geometry.BufferGeometry = function ( editor ) {
+Sidebar.Geometry.BufferGeometry = function (editor) {
+  var signals = editor.signals
 
-	var signals = editor.signals;
+  var container = new UI.Row()
 
-	var container = new UI.Row();
+  function update(object) {
+    if (object === null) return // objectSelected.dispatch( null )
+    if (object === undefined) return
 
-	function update( object ) {
+    var geometry = object.geometry
 
-		if ( object === null ) return; // objectSelected.dispatch( null )
-		if ( object === undefined ) return;
+    if (geometry instanceof THREE.BufferGeometry) {
+      container.clear()
+      container.setDisplay("block")
 
-		var geometry = object.geometry;
+      var index = geometry.index
 
-		if ( geometry instanceof THREE.BufferGeometry ) {
+      if (index !== null) {
+        var panel = new UI.Row()
+        panel.add(new UI.Text("index").setWidth("90px"))
+        panel.add(new UI.Text(index.count.format()).setFontSize("12px"))
+        container.add(panel)
+      }
 
-			container.clear();
-			container.setDisplay( 'block' );
+      var attributes = geometry.attributes
 
-			var index = geometry.index;
+      for (var name in attributes) {
+        var attribute = attributes[name]
 
-			if ( index !== null ) {
+        var panel = new UI.Row()
+        panel.add(new UI.Text(name).setWidth("90px"))
+        panel.add(
+          new UI.Text(
+            attribute.count.format() + " (" + attribute.itemSize + ")"
+          ).setFontSize("12px")
+        )
+        container.add(panel)
+      }
+    } else {
+      container.setDisplay("none")
+    }
+  }
 
-				var panel = new UI.Row();
-				panel.add( new UI.Text( 'index' ).setWidth( '90px' ) );
-				panel.add( new UI.Text( ( index.count ).format() ).setFontSize( '12px' ) );
-				container.add( panel );
+  signals.objectSelected.add(update)
+  signals.geometryChanged.add(update)
 
-			}
-
-			var attributes = geometry.attributes;
-
-			for ( var name in attributes ) {
-
-				var attribute = attributes[ name ];
-
-				var panel = new UI.Row();
-				panel.add( new UI.Text( name ).setWidth( '90px' ) );
-				panel.add( new UI.Text( ( attribute.count ).format() + ' (' + attribute.itemSize + ')' ).setFontSize( '12px' ) );
-				container.add( panel );
-
-			}
-
-		} else {
-
-			container.setDisplay( 'none' );
-
-		}
-
-	}
-
-	signals.objectSelected.add( update );
-	signals.geometryChanged.add( update );
-
-	return container;
-
-};
+  return container
+}

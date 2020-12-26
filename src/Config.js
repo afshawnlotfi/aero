@@ -14,9 +14,7 @@ var Config = function (name) {
     "project/renderer/shadows": true,
     "project/editable": false,
     "project/vr": false,
-
     "settings/history": false,
-
     "ui/sidebar/animation/collapsed": true,
   }
 

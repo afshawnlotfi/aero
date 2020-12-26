@@ -2,272 +2,236 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-Sidebar.Scene = function ( editor ) {
+Sidebar.Scene = function (editor) {
+  var signals = editor.signals
+
+  var container = new UI.Panel()
+  container.setBorderTop("0")
+  container.setPaddingTop("20px")
+
+  // outliner
 
-	var signals = editor.signals;
+  function buildOption(object, draggable) {
+    var option = document.createElement("div")
+    option.draggable = draggable
+    option.innerHTML = buildHTML(object)
+    option.value = object.id
+
+    return option
+  }
+
+  function buildHTML(object) {
+    var html = '<span class="type ' + object.type + '"></span> ' + object.name
 
-	var container = new UI.Panel();
-	container.setBorderTop( '0' );
-	container.setPaddingTop( '20px' );
+    if (object instanceof THREE.Mesh) {
+      var geometry = object.geometry
+      var material = object.material
 
-	// outliner
+      html +=
+        ' <span class="type ' + geometry.type + '"></span> ' + geometry.name
+      html +=
+        ' <span class="type ' + material.type + '"></span> ' + material.name
+    }
 
-	function buildOption( object, draggable ) {
+    html += getScript(object.uuid)
 
-		var option = document.createElement( 'div' );
-		option.draggable = draggable;
-		option.innerHTML = buildHTML( object );
-		option.value = object.id;
+    return html
+  }
 
-		return option;
+  function getScript(uuid) {
+    if (editor.scripts[uuid] !== undefined) {
+      return ' <span class="type Script"></span>'
+    }
 
-	}
+    return ""
+  }
+
+  var ignoreObjectSelectedSignal = false
+
+  var outliner = new UI.Outliner(editor)
+  outliner.setId("outliner")
+  outliner.onChange(function () {
+    ignoreObjectSelectedSignal = true
 
-	function buildHTML( object ) {
+    editor.selectById(parseInt(outliner.getValue()))
 
-		var html = '<span class="type ' + object.type + '"></span> ' + object.name;
+    ignoreObjectSelectedSignal = false
+  })
+  outliner.onDblClick(function () {
+    editor.focusById(parseInt(outliner.getValue()))
+  })
+  container.add(outliner)
+  container.add(new UI.Break())
 
-		if ( object instanceof THREE.Mesh ) {
+  // background
 
-			var geometry = object.geometry;
-			var material = object.material;
+  function onBackgroundChanged() {
+    signals.sceneBackgroundChanged.dispatch(backgroundColor.getHexValue())
+  }
 
-			html += ' <span class="type ' + geometry.type + '"></span> ' + geometry.name;
-			html += ' <span class="type ' + material.type + '"></span> ' + material.name;
+  var backgroundRow = new UI.Row()
 
-		}
+  var backgroundColor = new UI.Color()
+    .setValue("#aaaaaa")
+    .onChange(onBackgroundChanged)
 
-		html += getScript( object.uuid );
+  backgroundRow.add(new UI.Text("Background").setWidth("90px"))
+  backgroundRow.add(backgroundColor)
 
-		return html;
+  //container.add( backgroundRow ); DFH
 
-	}
+  // fog
 
-	function getScript( uuid ) {
+  function onFogChanged() {
+    signals.sceneFogChanged.dispatch(
+      fogType.getValue(),
+      fogColor.getHexValue(),
+      fogNear.getValue(),
+      fogFar.getValue(),
+      fogDensity.getValue()
+    )
+  }
+
+  var fogTypeRow = new UI.Row()
+  var fogType = new UI.Select()
+    .setOptions({
+      None: "None",
+      Fog: "Linear",
+      FogExp2: "Exponential",
+    })
+    .setWidth("150px")
+  fogType.onChange(function () {
+    onFogChanged()
+    refreshFogUI()
+  })
 
-		if ( editor.scripts[ uuid ] !== undefined ) {
+  fogTypeRow.add(new UI.Text("Fog").setWidth("90px"))
+  fogTypeRow.add(fogType)
 
-			return ' <span class="type Script"></span>';
+  //	container.add( fogTypeRow );
 
-		}
+  // fog color
 
-		return '';
+  var fogPropertiesRow = new UI.Row()
+  fogPropertiesRow.setDisplay("none")
+  fogPropertiesRow.setMarginLeft("90px")
+  container.add(fogPropertiesRow)
 
-	}
+  var fogColor = new UI.Color().setValue("#aaaaaa")
+  fogColor.onChange(onFogChanged)
+  fogPropertiesRow.add(fogColor)
 
-	var ignoreObjectSelectedSignal = false;
+  // fog near
 
-	var outliner = new UI.Outliner( editor );
-	outliner.setId( 'outliner' );
-	outliner.onChange( function () {
+  var fogNear = new UI.Number(0.1)
+    .setWidth("40px")
+    .setRange(0, Infinity)
+    .onChange(onFogChanged)
+  fogPropertiesRow.add(fogNear)
 
-		ignoreObjectSelectedSignal = true;
+  // fog far
 
-		editor.selectById( parseInt( outliner.getValue() ) );
+  var fogFar = new UI.Number(50)
+    .setWidth("40px")
+    .setRange(0, Infinity)
+    .onChange(onFogChanged)
+  fogPropertiesRow.add(fogFar)
 
-		ignoreObjectSelectedSignal = false;
+  // fog density
 
-	} );
-	outliner.onDblClick( function () {
+  var fogDensity = new UI.Number(0.05)
+    .setWidth("40px")
+    .setRange(0, 0.1)
+    .setPrecision(3)
+    .onChange(onFogChanged)
+  fogPropertiesRow.add(fogDensity)
 
-		editor.focusById( parseInt( outliner.getValue() ) );
+  //
 
-	} );
-	container.add( outliner );
-	container.add( new UI.Break() );
+  function refreshUI() {
+    var camera = editor.camera
+    var scene = editor.scene
 
-	// background
+    var options = []
 
-	function onBackgroundChanged() {
+    options.push(buildOption(camera, false))
+    options.push(buildOption(scene, false))
 
-		signals.sceneBackgroundChanged.dispatch( backgroundColor.getHexValue() );
+    ;(function addObjects(objects, pad) {
+      for (var i = 0, l = objects.length; i < l; i++) {
+        var object = objects[i]
 
-	}
+        var option = buildOption(object, true)
+        option.style.paddingLeft = pad * 10 + "px"
+        options.push(option)
 
-	var backgroundRow = new UI.Row();
+        addObjects(object.children, pad + 1)
+      }
+    })(scene.children, 1)
 
-	var backgroundColor = new UI.Color().setValue( '#aaaaaa' ).onChange( onBackgroundChanged );
+    outliner.setOptions(options)
 
-	backgroundRow.add( new UI.Text( 'Background' ).setWidth( '90px' ) );
-	backgroundRow.add( backgroundColor );
+    if (editor.selected !== null) {
+      outliner.setValue(editor.selected.id)
+    }
 
-	//container.add( backgroundRow ); DFH
+    if (scene.background) {
+      backgroundColor.setHexValue(scene.background.getHex())
+    }
 
-	// fog
+    if (scene.fog) {
+      fogColor.setHexValue(scene.fog.color.getHex())
 
-	function onFogChanged() {
+      if (scene.fog instanceof THREE.Fog) {
+        fogType.setValue("Fog")
+        fogNear.setValue(scene.fog.near)
+        fogFar.setValue(scene.fog.far)
+      } else if (scene.fog instanceof THREE.FogExp2) {
+        fogType.setValue("FogExp2")
+        fogDensity.setValue(scene.fog.density)
+      }
+    } else {
+      fogType.setValue("None")
+    }
 
-		signals.sceneFogChanged.dispatch(
-			fogType.getValue(),
-			fogColor.getHexValue(),
-			fogNear.getValue(),
-			fogFar.getValue(),
-			fogDensity.getValue()
-		);
+    refreshFogUI()
+  }
 
-	}
+  function refreshFogUI() {
+    var type = fogType.getValue()
 
-	var fogTypeRow = new UI.Row();
-	var fogType = new UI.Select().setOptions( {
+    fogPropertiesRow.setDisplay(type === "None" ? "none" : "")
+    fogNear.setDisplay(type === "Fog" ? "" : "none")
+    fogFar.setDisplay(type === "Fog" ? "" : "none")
+    fogDensity.setDisplay(type === "FogExp2" ? "" : "none")
+  }
 
-		'None': 'None',
-		'Fog': 'Linear',
-		'FogExp2': 'Exponential'
+  refreshUI()
 
-	} ).setWidth( '150px' );
-	fogType.onChange( function () {
+  // events
 
-		onFogChanged();
-		refreshFogUI();
+  signals.editorCleared.add(refreshUI)
 
-	} );
+  signals.sceneGraphChanged.add(refreshUI)
 
-	fogTypeRow.add( new UI.Text( 'Fog' ).setWidth( '90px' ) );
-	fogTypeRow.add( fogType );
+  signals.objectChanged.add(function (object) {
+    var options = outliner.options
 
-//	container.add( fogTypeRow );
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i]
 
-	// fog color
+      if (option.value === object.id) {
+        option.innerHTML = buildHTML(object)
+        return
+      }
+    }
+  })
 
-	var fogPropertiesRow = new UI.Row();
-	fogPropertiesRow.setDisplay( 'none' );
-	fogPropertiesRow.setMarginLeft( '90px' );
-	container.add( fogPropertiesRow );
+  signals.objectSelected.add(function (object) {
+    if (ignoreObjectSelectedSignal === true) return
 
-	var fogColor = new UI.Color().setValue( '#aaaaaa' );
-	fogColor.onChange( onFogChanged );
-	fogPropertiesRow.add( fogColor );
+    outliner.setValue(object !== null ? object.id : null)
+  })
 
-	// fog near
-
-	var fogNear = new UI.Number( 0.1 ).setWidth( '40px' ).setRange( 0, Infinity ).onChange( onFogChanged );
-	fogPropertiesRow.add( fogNear );
-
-	// fog far
-
-	var fogFar = new UI.Number( 50 ).setWidth( '40px' ).setRange( 0, Infinity ).onChange( onFogChanged );
-	fogPropertiesRow.add( fogFar );
-
-	// fog density
-
-	var fogDensity = new UI.Number( 0.05 ).setWidth( '40px' ).setRange( 0, 0.1 ).setPrecision( 3 ).onChange( onFogChanged );
-	fogPropertiesRow.add( fogDensity );
-
-	//
-
-	function refreshUI() {
-
-		var camera = editor.camera;
-		var scene = editor.scene;
-
-		var options = [];
-
-		options.push( buildOption( camera, false ) );
-		options.push( buildOption( scene, false ) );
-
-		( function addObjects( objects, pad ) {
-
-			for ( var i = 0, l = objects.length; i < l; i ++ ) {
-
-				var object = objects[ i ];
-
-				var option = buildOption( object, true );
-				option.style.paddingLeft = ( pad * 10 ) + 'px';
-				options.push( option );
-
-				addObjects( object.children, pad + 1 );
-
-			}
-
-		} )( scene.children, 1 );
-
-		outliner.setOptions( options );
-
-		if ( editor.selected !== null ) {
-
-			outliner.setValue( editor.selected.id );
-
-		}
-
-		if ( scene.background ) {
-
-			backgroundColor.setHexValue( scene.background.getHex() );
-
-		}
-
-		if ( scene.fog ) {
-
-			fogColor.setHexValue( scene.fog.color.getHex() );
-
-			if ( scene.fog instanceof THREE.Fog ) {
-
-				fogType.setValue( "Fog" );
-				fogNear.setValue( scene.fog.near );
-				fogFar.setValue( scene.fog.far );
-
-			} else if ( scene.fog instanceof THREE.FogExp2 ) {
-
-				fogType.setValue( "FogExp2" );
-				fogDensity.setValue( scene.fog.density );
-
-			}
-
-		} else {
-
-			fogType.setValue( "None" );
-
-		}
-
-		refreshFogUI();
-
-	}
-
-	function refreshFogUI() {
-
-		var type = fogType.getValue();
-
-		fogPropertiesRow.setDisplay( type === 'None' ? 'none' : '' );
-		fogNear.setDisplay( type === 'Fog' ? '' : 'none' );
-		fogFar.setDisplay( type === 'Fog' ? '' : 'none' );
-		fogDensity.setDisplay( type === 'FogExp2' ? '' : 'none' );
-
-	}
-
-	refreshUI();
-
-	// events
-
-	signals.editorCleared.add( refreshUI );
-
-	signals.sceneGraphChanged.add( refreshUI );
-
-	signals.objectChanged.add( function ( object ) {
-
-		var options = outliner.options;
-
-		for ( var i = 0; i < options.length; i ++ ) {
-
-			var option = options[ i ];
-
-			if ( option.value === object.id ) {
-
-				option.innerHTML = buildHTML( object );
-				return;
-
-			}
-
-		}
-
-	} );
-
-	signals.objectSelected.add( function ( object ) {
-
-		if ( ignoreObjectSelectedSignal === true ) return;
-
-		outliner.setValue( object !== null ? object.id : null );
-
-	} );
-
-	return container;
-
-};
+  return container
+}

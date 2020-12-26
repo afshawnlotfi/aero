@@ -3,127 +3,106 @@
  * Developed as part of a project at University of Applied Sciences and Arts Northwestern Switzerland (www.fhnw.ch)
  */
 
-Sidebar.History = function ( editor ) {
+Sidebar.History = function (editor) {
+  var signals = editor.signals
 
-	var signals = editor.signals;
+  var config = editor.config
 
-	var config = editor.config;
+  var history = editor.history
 
-	var history = editor.history;
+  var container = new UI.Panel()
 
-	var container = new UI.Panel();
+  container.add(new UI.Text("HISTORY"))
 
-	container.add( new UI.Text( 'HISTORY' ) );
+  //
 
-	//
+  var persistent = new UI.THREE.Boolean(
+    config.getKey("settings/history"),
+    "persistent"
+  )
+  persistent.setPosition("absolute").setRight("8px")
+  persistent.onChange(function () {
+    var value = this.getValue()
 
-	var persistent = new UI.THREE.Boolean( config.getKey( 'settings/history' ), 'persistent' );
-	persistent.setPosition( 'absolute' ).setRight( '8px' );
-	persistent.onChange( function () {
+    config.setKey("settings/history", value)
 
-		var value = this.getValue();
+    if (value) {
+      alert(
+        "The history will be preserved across sessions.\nThis can have an impact on performance when working with textures."
+      )
 
-		config.setKey( 'settings/history', value );
+      var lastUndoCmd = history.undos[history.undos.length - 1]
+      var lastUndoId = lastUndoCmd !== undefined ? lastUndoCmd.id : 0
+      editor.history.enableSerialization(lastUndoId)
+    } else {
+      signals.historyChanged.dispatch()
+    }
+  })
+  container.add(persistent)
 
-		if ( value ) {
+  container.add(new UI.Break(), new UI.Break())
 
-			alert( 'The history will be preserved across sessions.\nThis can have an impact on performance when working with textures.' );
+  var ignoreObjectSelectedSignal = false
 
-			var lastUndoCmd = history.undos[ history.undos.length - 1 ];
-			var lastUndoId = ( lastUndoCmd !== undefined ) ? lastUndoCmd.id : 0;
-			editor.history.enableSerialization( lastUndoId );
+  var outliner = new UI.Outliner(editor)
+  outliner.onChange(function () {
+    ignoreObjectSelectedSignal = true
 
-		} else {
+    editor.history.goToState(parseInt(outliner.getValue()))
 
-			signals.historyChanged.dispatch();
+    ignoreObjectSelectedSignal = false
+  })
+  container.add(outliner)
 
-		}
+  //
 
-	} );
-	container.add( persistent );
+  var refreshUI = function () {
+    var options = []
+    var enumerator = 1
 
-	container.add( new UI.Break(), new UI.Break() );
+    function buildOption(object) {
+      var option = document.createElement("div")
+      option.value = object.id
 
-	var ignoreObjectSelectedSignal = false;
+      return option
+    }
 
-	var outliner = new UI.Outliner( editor );
-	outliner.onChange( function () {
+    ;(function addObjects(objects) {
+      for (var i = 0, l = objects.length; i < l; i++) {
+        var object = objects[i]
 
-		ignoreObjectSelectedSignal = true;
+        var option = buildOption(object)
+        option.innerHTML = "&nbsp;" + object.name
 
-		editor.history.goToState( parseInt( outliner.getValue() ) );
+        options.push(option)
+      }
+    })(history.undos)
 
-		ignoreObjectSelectedSignal = false;
+    ;(function addObjects(objects, pad) {
+      for (var i = objects.length - 1; i >= 0; i--) {
+        var object = objects[i]
 
-	} );
-	container.add( outliner );
+        var option = buildOption(object)
+        option.innerHTML = "&nbsp;" + object.name
+        option.style.opacity = 0.3
 
-	//
+        options.push(option)
+      }
+    })(history.redos, "&nbsp;")
 
-	var refreshUI = function () {
+    outliner.setOptions(options)
+  }
 
-		var options = [];
-		var enumerator = 1;
+  refreshUI()
 
-		function buildOption( object ) {
+  // events
 
-			var option = document.createElement( 'div' );
-			option.value = object.id;
+  signals.editorCleared.add(refreshUI)
 
-			return option;
+  signals.historyChanged.add(refreshUI)
+  signals.historyChanged.add(function (cmd) {
+    outliner.setValue(cmd !== undefined ? cmd.id : null)
+  })
 
-		}
-
-		( function addObjects( objects ) {
-
-			for ( var i = 0, l = objects.length; i < l; i ++ ) {
-
-				var object = objects[ i ];
-
-				var option = buildOption( object );
-				option.innerHTML = '&nbsp;' + object.name;
-
-				options.push( option );
-
-			}
-
-		} )( history.undos );
-
-
-		( function addObjects( objects, pad ) {
-
-			for ( var i = objects.length - 1; i >= 0; i -- ) {
-
-				var object = objects[ i ];
-
-				var option = buildOption( object );
-				option.innerHTML = '&nbsp;' + object.name;
-				option.style.opacity = 0.3;
-
-				options.push( option );
-
-			}
-
-		} )( history.redos, '&nbsp;' );
-
-		outliner.setOptions( options );
-
-	};
-
-	refreshUI();
-
-	// events
-
-	signals.editorCleared.add( refreshUI );
-
-	signals.historyChanged.add( refreshUI );
-	signals.historyChanged.add( function ( cmd ) {
-
-		outliner.setValue( cmd !== undefined ? cmd.id : null );
-
-	} );
-
-
-	return container;
-
-};
+  return container
+}

@@ -10,67 +10,53 @@
  * @constructor
  */
 
-var SetValueCommand = function ( object, attributeName, newValue ) {
+var SetValueCommand = function (object, attributeName, newValue) {
+  Command.call(this)
 
-	Command.call( this );
+  this.type = "SetValueCommand"
+  this.name = "Set " + attributeName
+  this.updatable = true
 
-	this.type = 'SetValueCommand';
-	this.name = 'Set ' + attributeName;
-	this.updatable = true;
-
-	this.object = object;
-	this.attributeName = attributeName;
-	this.oldValue = ( object !== undefined ) ? object[ attributeName ] : undefined;
-	this.newValue = newValue;
-
-};
+  this.object = object
+  this.attributeName = attributeName
+  this.oldValue = object !== undefined ? object[attributeName] : undefined
+  this.newValue = newValue
+}
 
 SetValueCommand.prototype = {
+  execute: function () {
+    this.object[this.attributeName] = this.newValue
+    this.editor.signals.objectChanged.dispatch(this.object)
+    // this.editor.signals.sceneGraphChanged.dispatch();
+  },
 
-	execute: function () {
+  undo: function () {
+    this.object[this.attributeName] = this.oldValue
+    this.editor.signals.objectChanged.dispatch(this.object)
+    // this.editor.signals.sceneGraphChanged.dispatch();
+  },
 
-		this.object[ this.attributeName ] = this.newValue;
-		this.editor.signals.objectChanged.dispatch( this.object );
-		// this.editor.signals.sceneGraphChanged.dispatch();
+  update: function (cmd) {
+    this.newValue = cmd.newValue
+  },
 
-	},
+  toJSON: function () {
+    var output = Command.prototype.toJSON.call(this)
 
-	undo: function () {
+    output.objectUuid = this.object.uuid
+    output.attributeName = this.attributeName
+    output.oldValue = this.oldValue
+    output.newValue = this.newValue
 
-		this.object[ this.attributeName ] = this.oldValue;
-		this.editor.signals.objectChanged.dispatch( this.object );
-		// this.editor.signals.sceneGraphChanged.dispatch();
+    return output
+  },
 
-	},
+  fromJSON: function (json) {
+    Command.prototype.fromJSON.call(this, json)
 
-	update: function ( cmd ) {
-
-		this.newValue = cmd.newValue;
-
-	},
-
-	toJSON: function () {
-
-		var output = Command.prototype.toJSON.call( this );
-
-		output.objectUuid = this.object.uuid;
-		output.attributeName = this.attributeName;
-		output.oldValue = this.oldValue;
-		output.newValue = this.newValue;
-
-		return output;
-
-	},
-
-	fromJSON: function ( json ) {
-
-		Command.prototype.fromJSON.call( this, json );
-
-		this.attributeName = json.attributeName;
-		this.oldValue = json.oldValue;
-		this.newValue = json.newValue;
-		this.object = this.editor.objectByUuid( json.objectUuid );
-
-	}
-
-};
+    this.attributeName = json.attributeName
+    this.oldValue = json.oldValue
+    this.newValue = json.newValue
+    this.object = this.editor.objectByUuid(json.objectUuid)
+  },
+}

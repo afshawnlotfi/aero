@@ -10,75 +10,57 @@
  * @constructor
  */
 
-var SetScaleCommand = function ( object, newScale, optionalOldScale ) {
+var SetScaleCommand = function (object, newScale, optionalOldScale) {
+  Command.call(this)
 
-	Command.call( this );
+  this.type = "SetScaleCommand"
+  this.name = "Set Scale"
+  this.updatable = true
 
-	this.type = 'SetScaleCommand';
-	this.name = 'Set Scale';
-	this.updatable = true;
+  this.object = object
 
-	this.object = object;
+  if (object !== undefined && newScale !== undefined) {
+    this.oldScale = object.scale.clone()
+    this.newScale = newScale.clone()
+  }
 
-	if ( object !== undefined && newScale !== undefined ) {
-
-		this.oldScale = object.scale.clone();
-		this.newScale = newScale.clone();
-
-	}
-
-	if ( optionalOldScale !== undefined ) {
-
-		this.oldScale = optionalOldScale.clone();
-
-	}
-
-};
+  if (optionalOldScale !== undefined) {
+    this.oldScale = optionalOldScale.clone()
+  }
+}
 
 SetScaleCommand.prototype = {
+  execute: function () {
+    this.object.scale.copy(this.newScale)
+    this.object.updateMatrixWorld(true)
+    this.editor.signals.objectChanged.dispatch(this.object)
+  },
 
-	execute: function () {
+  undo: function () {
+    this.object.scale.copy(this.oldScale)
+    this.object.updateMatrixWorld(true)
+    this.editor.signals.objectChanged.dispatch(this.object)
+  },
 
-		this.object.scale.copy( this.newScale );
-		this.object.updateMatrixWorld( true );
-		this.editor.signals.objectChanged.dispatch( this.object );
+  update: function (command) {
+    this.newScale.copy(command.newScale)
+  },
 
-	},
+  toJSON: function () {
+    var output = Command.prototype.toJSON.call(this)
 
-	undo: function () {
+    output.objectUuid = this.object.uuid
+    output.oldScale = this.oldScale.toArray()
+    output.newScale = this.newScale.toArray()
 
-		this.object.scale.copy( this.oldScale );
-		this.object.updateMatrixWorld( true );
-		this.editor.signals.objectChanged.dispatch( this.object );
+    return output
+  },
 
-	},
+  fromJSON: function (json) {
+    Command.prototype.fromJSON.call(this, json)
 
-	update: function ( command ) {
-
-		this.newScale.copy( command.newScale );
-
-	},
-
-	toJSON: function () {
-
-		var output = Command.prototype.toJSON.call( this );
-
-		output.objectUuid = this.object.uuid;
-		output.oldScale = this.oldScale.toArray();
-		output.newScale = this.newScale.toArray();
-
-		return output;
-
-	},
-
-	fromJSON: function ( json ) {
-
-		Command.prototype.fromJSON.call( this, json );
-
-		this.object = this.editor.objectByUuid( json.objectUuid );
-		this.oldScale = new THREE.Vector3().fromArray( json.oldScale );
-		this.newScale = new THREE.Vector3().fromArray( json.newScale );
-
-	}
-
-};
+    this.object = this.editor.objectByUuid(json.objectUuid)
+    this.oldScale = new THREE.Vector3().fromArray(json.oldScale)
+    this.newScale = new THREE.Vector3().fromArray(json.newScale)
+  },
+}

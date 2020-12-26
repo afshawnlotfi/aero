@@ -3,588 +3,482 @@
  */
 
 var Editor = function () {
+  this.DEFAULT_CAMERA = new THREE.PerspectiveCamera(50, 1, 0.1, 10000)
+  this.DEFAULT_CAMERA.name = "Camera"
+  this.DEFAULT_CAMERA.position.set(-20, 20, -20) // DFH
+  this.DEFAULT_CAMERA.up.set(0, 0, -1) // DFH
+  this.DEFAULT_CAMERA.lookAt(new THREE.Vector3(0, 0, 0)) // DFH
 
-	this.DEFAULT_CAMERA = new THREE.PerspectiveCamera( 50, 1, 0.1, 10000 );
-	this.DEFAULT_CAMERA.name = 'Camera';
-	this.DEFAULT_CAMERA.position.set( -20, 20, -20 ); // DFH
-	this.DEFAULT_CAMERA.up.set( 0, 0, -1 ); // DFH
-	this.DEFAULT_CAMERA.lookAt( new THREE.Vector3( 0, 0, 0 ) ); // DFH
+  var Signal = signals.Signal
 
-	var Signal = signals.Signal;
+  this.signals = {
+    // script
 
-	this.signals = {
+    editScript: new Signal(),
 
-		// script
+    // player
 
-		editScript: new Signal(),
+    startPlayer: new Signal(),
+    stopPlayer: new Signal(),
 
-		// player
+    // vr
 
-		startPlayer: new Signal(),
-		stopPlayer: new Signal(),
+    enterVR: new Signal(),
 
-		// vr
+    enteredVR: new Signal(),
+    exitedVR: new Signal(),
 
-		enterVR: new Signal(),
+    // actions
 
-		enteredVR: new Signal(),
-		exitedVR: new Signal(),
+    showModal: new Signal(),
 
-		// actions
+    // notifications
 
-		showModal: new Signal(),
+    editorCleared: new Signal(),
 
-		// notifications
+    savingStarted: new Signal(),
+    savingFinished: new Signal(),
 
-		editorCleared: new Signal(),
+    themeChanged: new Signal(),
 
-		savingStarted: new Signal(),
-		savingFinished: new Signal(),
+    transformModeChanged: new Signal(),
+    snapChanged: new Signal(),
+    spaceChanged: new Signal(),
+    rendererChanged: new Signal(),
 
-		themeChanged: new Signal(),
+    sceneBackgroundChanged: new Signal(),
+    sceneFogChanged: new Signal(),
+    sceneGraphChanged: new Signal(),
 
-		transformModeChanged: new Signal(),
-		snapChanged: new Signal(),
-		spaceChanged: new Signal(),
-		rendererChanged: new Signal(),
+    cameraChanged: new Signal(),
 
-		sceneBackgroundChanged: new Signal(),
-		sceneFogChanged: new Signal(),
-		sceneGraphChanged: new Signal(),
+    geometryChanged: new Signal(),
 
-		cameraChanged: new Signal(),
+    objectSelected: new Signal(),
+    objectFocused: new Signal(),
 
-		geometryChanged: new Signal(),
+    analysisChanged: new Signal(), // DFH
 
-		objectSelected: new Signal(),
-		objectFocused: new Signal(),
+    objectAdded: new Signal(),
+    objectChanged: new Signal(),
+    objectRemoved: new Signal(),
 
-		analysisChanged: new Signal(), // DFH
+    helperAdded: new Signal(),
+    helperRemoved: new Signal(),
 
-		objectAdded: new Signal(),
-		objectChanged: new Signal(),
-		objectRemoved: new Signal(),
+    materialChanged: new Signal(),
 
-		helperAdded: new Signal(),
-		helperRemoved: new Signal(),
+    scriptAdded: new Signal(),
+    scriptChanged: new Signal(),
+    scriptRemoved: new Signal(),
 
-		materialChanged: new Signal(),
+    windowResize: new Signal(),
 
-		scriptAdded: new Signal(),
-		scriptChanged: new Signal(),
-		scriptRemoved: new Signal(),
+    showGridChanged: new Signal(),
+    refreshSidebarObject3D: new Signal(),
+    historyChanged: new Signal(),
+    refreshScriptEditor: new Signal(),
+  }
 
-		windowResize: new Signal(),
+  this.config = new Config("MachUp5-Storage") // DFH
+  this.history = new History(this)
+  this.storage = new Storage()
+  this.loader = new Loader(this)
 
-		showGridChanged: new Signal(),
-		refreshSidebarObject3D: new Signal(),
-		historyChanged: new Signal(),
-		refreshScriptEditor: new Signal()
+  this.camera = this.DEFAULT_CAMERA.clone()
 
-	};
+  this.scene = new THREE.Scene()
+  this.scene.name = "MyAirplane" // DFH
+  this.scene.background = new THREE.Color(0x000000)
 
-	this.config = new Config( 'MachUp5-Storage' ); // DFH
-	this.history = new History( this );
-	this.storage = new Storage();
-	this.loader = new Loader( this );
+  this.sceneHelpers = new THREE.Scene()
 
-	this.camera = this.DEFAULT_CAMERA.clone();
+  this.object = {}
+  this.geometries = {}
+  this.materials = {}
+  this.textures = {}
+  this.scripts = {}
 
-	this.scene = new THREE.Scene();
-	this.scene.name = 'MyAirplane'; // DFH
-	this.scene.background = new THREE.Color( 0x000000 );
-
-	this.sceneHelpers = new THREE.Scene();
-
-	this.object = {};
-	this.geometries = {};
-	this.materials = {};
-	this.textures = {};
-	this.scripts = {};
-
-	this.selected = null;
-	this.helpers = {};
-
-};
+  this.selected = null
+  this.helpers = {}
+}
 
 Editor.prototype = {
+  setTheme: function (value) {
+    document.getElementById("theme").href = value
 
-	setTheme: function ( value ) {
+    this.signals.themeChanged.dispatch(value)
+  },
 
-		document.getElementById( 'theme' ).href = value;
+  //
 
-		this.signals.themeChanged.dispatch( value );
+  setScene: function (scene) {
+    this.scene.uuid = scene.uuid
+    this.scene.name = scene.name
 
-	},
+    if (scene.background !== null)
+      this.scene.background = scene.background.clone()
+    if (scene.fog !== null) this.scene.fog = scene.fog.clone()
 
-	//
+    this.scene.userData = JSON.parse(JSON.stringify(scene.userData))
 
-	setScene: function ( scene ) {
+    // avoid render per object
 
-		this.scene.uuid = scene.uuid;
-		this.scene.name = scene.name;
+    this.signals.sceneGraphChanged.active = false
 
-		if ( scene.background !== null ) this.scene.background = scene.background.clone();
-		if ( scene.fog !== null ) this.scene.fog = scene.fog.clone();
+    while (scene.children.length > 0) {
+      this.addObject(scene.children[0])
+    }
 
-		this.scene.userData = JSON.parse( JSON.stringify( scene.userData ) );
+    delete_duplicate_components(editor) //DFH
 
-		// avoid render per object
+    this.signals.sceneGraphChanged.active = true
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-		this.signals.sceneGraphChanged.active = false;
+  //
 
-		while ( scene.children.length > 0 ) {
+  notAddObject: function (object) {
+    // DFH
 
-			this.addObject( scene.children[ 0 ] );
+    var scope = this
 
-		}
+    object.traverse(function (child) {
+      if (child.geometry !== undefined) scope.addGeometry(child.geometry)
+      if (child.material !== undefined) scope.addMaterial(child.material)
 
-		delete_duplicate_components( editor ); //DFH
+      scope.addHelper(child)
+    })
 
-		this.signals.sceneGraphChanged.active = true;
-		this.signals.sceneGraphChanged.dispatch();
+    //this.scene.add( object );
 
-	},
+    this.signals.objectAdded.dispatch(object)
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-	//
+  addObject: function (object) {
+    var scope = this
 
-	notAddObject: function ( object ) { // DFH
+    object.traverse(function (child) {
+      if (child.geometry !== undefined) scope.addGeometry(child.geometry)
+      if (child.material !== undefined) scope.addMaterial(child.material)
 
-		var scope = this;
+      scope.addHelper(child)
+    })
 
-		object.traverse( function ( child ) {
+    this.scene.add(object)
 
-			if ( child.geometry !== undefined ) scope.addGeometry( child.geometry );
-			if ( child.material !== undefined ) scope.addMaterial( child.material );
+    this.signals.objectAdded.dispatch(object)
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-			scope.addHelper( child );
+  moveObject: function (object, parent, before) {
+    if (parent === undefined) {
+      parent = this.scene
+    }
 
-		} );
+    parent.add(object)
 
-	  //this.scene.add( object );
+    // sort children array
 
-		this.signals.objectAdded.dispatch( object );
-		this.signals.sceneGraphChanged.dispatch();
+    if (before !== undefined) {
+      var index = parent.children.indexOf(before)
+      parent.children.splice(index, 0, object)
+      parent.children.pop()
+    }
 
-	},
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-	addObject: function ( object ) {
+  nameObject: function (object, name) {
+    if (object.name !== "Center of Gravity") {
+      // DFH
+      object.name = name
+    }
+    if (object.name !== "Aerodynamic Center") {
+      // DFH
+      object.name = name
+    }
 
-		var scope = this;
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-		object.traverse( function ( child ) {
+  removeObject: function (object) {
+    if (object.parent === null) return // avoid deleting the camera or scene
+
+    if (object.name === "Center of Gravity") return // DFH avoid deleting the CG Sphere
+    if (object.name === "Aerodynamic Center") return // DFH avoid deleting the CG Sphere
+
+    var scope = this
+
+    object.traverse(function (child) {
+      scope.removeHelper(child)
+    })
+
+    object.parent.remove(object)
 
-			if ( child.geometry !== undefined ) scope.addGeometry( child.geometry );
-			if ( child.material !== undefined ) scope.addMaterial( child.material );
+    this.signals.objectRemoved.dispatch(object)
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-			scope.addHelper( child );
+  addGeometry: function (geometry) {
+    this.geometries[geometry.uuid] = geometry
+  },
 
-		} );
+  setGeometryName: function (geometry, name) {
+    geometry.name = name
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-		this.scene.add( object );
+  addMaterial: function (material) {
+    this.materials[material.uuid] = material
+  },
 
-		this.signals.objectAdded.dispatch( object );
-		this.signals.sceneGraphChanged.dispatch();
+  setMaterialName: function (material, name) {
+    material.name = name
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-	},
+  addTexture: function (texture) {
+    this.textures[texture.uuid] = texture
+  },
 
-	moveObject: function ( object, parent, before ) {
+  //
 
-		if ( parent === undefined ) {
+  addHelper: (function () {
+    var geometry = new THREE.SphereBufferGeometry(2, 4, 2)
+    var material = new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+      visible: false,
+    })
 
-			parent = this.scene;
+    return function (object) {
+      var helper
 
-		}
+      if (object instanceof THREE.Camera) {
+        helper = new THREE.CameraHelper(object, 1)
+      } else if (object instanceof THREE.PointLight) {
+        helper = new THREE.PointLightHelper(object, 1)
+      } else if (object instanceof THREE.DirectionalLight) {
+        helper = new THREE.DirectionalLightHelper(object, 2) //DFH
+      } else if (object instanceof THREE.SpotLight) {
+        helper = new THREE.SpotLightHelper(object, 1)
+      } else if (object instanceof THREE.HemisphereLight) {
+        helper = new THREE.HemisphereLightHelper(object, 1)
+      } else if (object instanceof THREE.SkinnedMesh) {
+        helper = new THREE.SkeletonHelper(object)
+      } else {
+        // no helper for this object type
+        return
+      }
 
-		parent.add( object );
+      var picker = new THREE.Mesh(geometry, material)
+      picker.name = "picker"
+      picker.userData.object = object
+      helper.add(picker)
 
-		// sort children array
+      this.sceneHelpers.add(helper)
+      this.helpers[object.id] = helper
 
-		if ( before !== undefined ) {
+      this.signals.helperAdded.dispatch(helper)
+    }
+  })(),
 
-			var index = parent.children.indexOf( before );
-			parent.children.splice( index, 0, object );
-			parent.children.pop();
+  removeHelper: function (object) {
+    if (this.helpers[object.id] !== undefined) {
+      var helper = this.helpers[object.id]
+      helper.parent.remove(helper)
 
-		}
+      delete this.helpers[object.id]
 
-		this.signals.sceneGraphChanged.dispatch();
+      this.signals.helperRemoved.dispatch(helper)
+    }
+  },
 
-	},
+  //
 
-	nameObject: function ( object, name ) {
+  parent: function (object, parent) {
+    // DFH
 
-		if ( object.name !== 'Center of Gravity' ) { // DFH
-			object.name = name;
-		}
-		if ( object.name !== 'Aerodynamic Center' ) { // DFH
-			object.name = name;
-		}
+    if (parent === undefined) {
+      parent = this.scene
+    }
 
-		this.signals.sceneGraphChanged.dispatch();
+    parent.add(object)
 
-	},
+    this.signals.sceneGraphChanged.dispatch()
+  },
 
-	removeObject: function ( object ) {
+  //
 
-		if ( object.parent === null ) return; // avoid deleting the camera or scene
+  addScript: function (object, script) {
+    if (this.scripts[object.uuid] === undefined) {
+      this.scripts[object.uuid] = []
+    }
 
-		if ( object.name === 'Center of Gravity' ) return; // DFH avoid deleting the CG Sphere
-		if ( object.name === 'Aerodynamic Center' ) return; // DFH avoid deleting the CG Sphere
+    this.scripts[object.uuid].push(script)
 
-		var scope = this;
+    this.signals.scriptAdded.dispatch(script)
+  },
 
-		object.traverse( function ( child ) {
+  removeScript: function (object, script) {
+    if (this.scripts[object.uuid] === undefined) return
 
-			scope.removeHelper( child );
+    var index = this.scripts[object.uuid].indexOf(script)
 
-		} );
+    if (index !== -1) {
+      this.scripts[object.uuid].splice(index, 1)
+    }
 
-		object.parent.remove( object );
+    this.signals.scriptRemoved.dispatch(script)
+  },
 
-		this.signals.objectRemoved.dispatch( object );
-		this.signals.sceneGraphChanged.dispatch();
+  //
 
-	},
+  select: function (object) {
+    if (this.selected === object) return
 
-	addGeometry: function ( geometry ) {
+    var uuid = null
 
-		this.geometries[ geometry.uuid ] = geometry;
+    if (object !== null) {
+      uuid = object.uuid
+    }
 
-	},
+    this.selected = object
 
-	setGeometryName: function ( geometry, name ) {
+    this.config.setKey("selected", uuid)
+    this.signals.objectSelected.dispatch(object)
+  },
 
-		geometry.name = name;
-		this.signals.sceneGraphChanged.dispatch();
+  selectById: function (id) {
+    if (id === this.camera.id) {
+      this.select(this.camera)
+      return
+    }
 
-	},
+    this.select(this.scene.getObjectById(id, true))
+  },
 
-	addMaterial: function ( material ) {
+  selectByUuid: function (uuid) {
+    var scope = this
 
-		this.materials[ material.uuid ] = material;
+    this.scene.traverse(function (child) {
+      if (child.uuid === uuid) {
+        scope.select(child)
+      }
+    })
+  },
 
-	},
+  deselect: function () {
+    this.select(null)
+  },
 
-	setMaterialName: function ( material, name ) {
+  focus: function (object) {
+    this.signals.objectFocused.dispatch(object)
+  },
 
-		material.name = name;
-		this.signals.sceneGraphChanged.dispatch();
+  focusById: function (id) {
+    this.focus(this.scene.getObjectById(id, true))
+  },
 
-	},
+  clear: function () {
+    this.history.clear()
+    this.storage.clear()
 
-	addTexture: function ( texture ) {
+    this.camera.copy(this.DEFAULT_CAMERA)
+    this.scene.background.setHex(0x000000)
+    this.scene.fog = null
 
-		this.textures[ texture.uuid ] = texture;
+    var objects = this.scene.children
 
-	},
+    while (objects.length > 3) {
+      // DFH ( allows for Menubar.File "New" option to work without deleteing CG )
 
-	//
+      this.removeObject(objects[objects.length - 1]) // DFH ( see above )
+    }
 
-	addHelper: function () {
+    this.geometries = {}
+    this.materials = {}
+    this.textures = {}
+    this.scripts = {}
 
-		var geometry = new THREE.SphereBufferGeometry( 2, 4, 2 );
-		var material = new THREE.MeshBasicMaterial( { color: 0xff0000, visible: false } );
+    this.deselect()
 
-		return function ( object ) {
+    this.signals.editorCleared.dispatch()
+  },
 
-			var helper;
+  //
 
-			if ( object instanceof THREE.Camera ) {
+  fromJSON: function (json) {
+    var loader = new THREE.ObjectLoader()
 
-				helper = new THREE.CameraHelper( object, 1 );
+    // backwards
 
-			} else if ( object instanceof THREE.PointLight ) {
+    if (json.scene === undefined) {
+      this.setScene(loader.parse(json))
+      return
+    }
 
-				helper = new THREE.PointLightHelper( object, 1 );
+    var camera = loader.parse(json.camera)
 
-			} else if ( object instanceof THREE.DirectionalLight ) {
+    this.camera.copy(camera)
+    this.camera.aspect = this.DEFAULT_CAMERA.aspect
+    this.camera.updateProjectionMatrix()
 
-				helper = new THREE.DirectionalLightHelper( object, 2 ); //DFH
+    this.history.fromJSON(json.history)
+    this.scripts = json.scripts
 
-			} else if ( object instanceof THREE.SpotLight ) {
+    this.setScene(loader.parse(json.scene))
+  },
 
-				helper = new THREE.SpotLightHelper( object, 1 );
+  toJSON: function () {
+    // scripts clean up
 
-			} else if ( object instanceof THREE.HemisphereLight ) {
+    var scene = this.scene
+    var scripts = this.scripts
 
-				helper = new THREE.HemisphereLightHelper( object, 1 );
+    for (var key in scripts) {
+      var script = scripts[key]
 
-			} else if ( object instanceof THREE.SkinnedMesh ) {
+      if (
+        script.length === 0 ||
+        scene.getObjectByProperty("uuid", key) === undefined
+      ) {
+        delete scripts[key]
+      }
+    }
 
-				helper = new THREE.SkeletonHelper( object );
+    //
 
-			} else {
+    return {
+      metadata: {},
+      project: {
+        gammaInput: this.config.getKey("project/renderer/gammaInput"),
+        gammaOutput: this.config.getKey("project/renderer/gammaOutput"),
+        shadows: this.config.getKey("project/renderer/shadows"),
+        editable: this.config.getKey("project/editable"),
+        vr: this.config.getKey("project/vr"),
+      },
+      camera: this.camera.toJSON(),
+      scene: this.scene.toJSON(),
+      scripts: this.scripts,
+      history: this.history.toJSON(),
+    }
+  },
 
-				// no helper for this object type
-				return;
+  objectByUuid: function (uuid) {
+    return this.scene.getObjectByProperty("uuid", uuid, true)
+  },
 
-			}
+  execute: function (cmd, optionalName) {
+    this.history.execute(cmd, optionalName)
+  },
 
-			var picker = new THREE.Mesh( geometry, material );
-			picker.name = 'picker';
-			picker.userData.object = object;
-			helper.add( picker );
+  undo: function () {
+    this.history.undo()
+  },
 
-			this.sceneHelpers.add( helper );
-			this.helpers[ object.id ] = helper;
-
-			this.signals.helperAdded.dispatch( helper );
-
-		};
-
-	}(),
-
-	removeHelper: function ( object ) {
-
-		if ( this.helpers[ object.id ] !== undefined ) {
-
-			var helper = this.helpers[ object.id ];
-			helper.parent.remove( helper );
-
-			delete this.helpers[ object.id ];
-
-			this.signals.helperRemoved.dispatch( helper );
-
-		}
-
-	},
-
-	//
-
-	parent: function ( object, parent ) { // DFH
-
-		if ( parent === undefined ) {
-
-			parent = this.scene;
-
-		}
-
-		parent.add( object );
-
-		this.signals.sceneGraphChanged.dispatch();
-	},
-
-	//
-
-	addScript: function ( object, script ) {
-
-		if ( this.scripts[ object.uuid ] === undefined ) {
-
-			this.scripts[ object.uuid ] = [];
-
-		}
-
-		this.scripts[ object.uuid ].push( script );
-
-		this.signals.scriptAdded.dispatch( script );
-
-	},
-
-	removeScript: function ( object, script ) {
-
-		if ( this.scripts[ object.uuid ] === undefined ) return;
-
-		var index = this.scripts[ object.uuid ].indexOf( script );
-
-		if ( index !== - 1 ) {
-
-			this.scripts[ object.uuid ].splice( index, 1 );
-
-		}
-
-		this.signals.scriptRemoved.dispatch( script );
-
-	},
-
-
-
-	//
-
-	select: function ( object ) {
-
-		if ( this.selected === object ) return;
-
-		var uuid = null;
-
-		if ( object !== null ) {
-
-			uuid = object.uuid;
-
-		}
-
-		this.selected = object;
-
-		this.config.setKey( 'selected', uuid );
-		this.signals.objectSelected.dispatch( object );
-
-	},
-
-	selectById: function ( id ) {
-
-		if ( id === this.camera.id ) {
-
-			this.select( this.camera );
-			return;
-
-		}
-
-		this.select( this.scene.getObjectById( id, true ) );
-
-	},
-
-	selectByUuid: function ( uuid ) {
-
-		var scope = this;
-
-		this.scene.traverse( function ( child ) {
-
-			if ( child.uuid === uuid ) {
-
-				scope.select( child );
-
-			}
-
-		} );
-
-	},
-
-	deselect: function () {
-
-		this.select( null );
-
-	},
-
-	focus: function ( object ) {
-
-		this.signals.objectFocused.dispatch( object );
-
-	},
-
-	focusById: function ( id ) {
-
-		this.focus( this.scene.getObjectById( id, true ) );
-
-	},
-
-	clear: function () {
-
-		this.history.clear();
-		this.storage.clear();
-
-		this.camera.copy( this.DEFAULT_CAMERA );
-		this.scene.background.setHex( 0x000000 );
-		this.scene.fog = null;
-
-		var objects = this.scene.children;
-
-		while ( objects.length > 3 ) { // DFH ( allows for Menubar.File "New" option to work without deleteing CG )
-
-			this.removeObject( objects[ objects.length - 1 ] ); // DFH ( see above )
-
-		}
-
-		this.geometries = {};
-		this.materials = {};
-		this.textures = {};
-		this.scripts = {};
-
-		this.deselect();
-
-		this.signals.editorCleared.dispatch();
-
-	},
-
-	//
-
-	fromJSON: function ( json ) {
-
-		var loader = new THREE.ObjectLoader();
-
-		// backwards
-
-		if ( json.scene === undefined ) {
-
-			this.setScene( loader.parse( json ) );
-			return;
-
-		}
-
-		var camera = loader.parse( json.camera );
-
-		this.camera.copy( camera );
-		this.camera.aspect = this.DEFAULT_CAMERA.aspect;
-		this.camera.updateProjectionMatrix();
-
-		this.history.fromJSON( json.history );
-		this.scripts = json.scripts;
-
-		this.setScene( loader.parse( json.scene ) );
-
-	},
-
-	toJSON: function () {
-
-		// scripts clean up
-
-		var scene = this.scene;
-		var scripts = this.scripts;
-
-		for ( var key in scripts ) {
-
-			var script = scripts[ key ];
-
-			if ( script.length === 0 || scene.getObjectByProperty( 'uuid', key ) === undefined ) {
-
-				delete scripts[ key ];
-
-			}
-
-		}
-
-		//
-
-		return {
-
-			metadata: {},
-			project: {
-				gammaInput: this.config.getKey( 'project/renderer/gammaInput' ),
-				gammaOutput: this.config.getKey( 'project/renderer/gammaOutput' ),
-				shadows: this.config.getKey( 'project/renderer/shadows' ),
-				editable: this.config.getKey( 'project/editable' ),
-				vr: this.config.getKey( 'project/vr' )
-			},
-			camera: this.camera.toJSON(),
-			scene: this.scene.toJSON(),
-			scripts: this.scripts,
-			history: this.history.toJSON()
-
-		};
-
-	},
-
-	objectByUuid: function ( uuid ) {
-
-		return this.scene.getObjectByProperty( 'uuid', uuid, true );
-
-	},
-
-	execute: function ( cmd, optionalName ) {
-
-		this.history.execute( cmd, optionalName );
-
-	},
-
-	undo: function () {
-
-		this.history.undo();
-
-	},
-
-	redo: function () {
-
-		this.history.redo();
-
-	}
-
-};
+  redo: function () {
+    this.history.redo()
+  },
+}

@@ -10,75 +10,57 @@
  * @constructor
  */
 
-var SetRotationCommand = function ( object, newRotation, optionalOldRotation ) {
+var SetRotationCommand = function (object, newRotation, optionalOldRotation) {
+  Command.call(this)
 
-	Command.call( this );
+  this.type = "SetRotationCommand"
+  this.name = "Set Rotation"
+  this.updatable = true
 
-	this.type = 'SetRotationCommand';
-	this.name = 'Set Rotation';
-	this.updatable = true;
+  this.object = object
 
-	this.object = object;
+  if (object !== undefined && newRotation !== undefined) {
+    this.oldRotation = object.rotation.clone()
+    this.newRotation = newRotation.clone()
+  }
 
-	if ( object !== undefined && newRotation !== undefined ) {
-
-		this.oldRotation = object.rotation.clone();
-		this.newRotation = newRotation.clone();
-
-	}
-
-	if ( optionalOldRotation !== undefined ) {
-
-		this.oldRotation = optionalOldRotation.clone();
-
-	}
-
-};
+  if (optionalOldRotation !== undefined) {
+    this.oldRotation = optionalOldRotation.clone()
+  }
+}
 
 SetRotationCommand.prototype = {
+  execute: function () {
+    this.object.rotation.copy(this.newRotation)
+    this.object.updateMatrixWorld(true)
+    this.editor.signals.objectChanged.dispatch(this.object)
+  },
 
-	execute: function () {
+  undo: function () {
+    this.object.rotation.copy(this.oldRotation)
+    this.object.updateMatrixWorld(true)
+    this.editor.signals.objectChanged.dispatch(this.object)
+  },
 
-		this.object.rotation.copy( this.newRotation );
-		this.object.updateMatrixWorld( true );
-		this.editor.signals.objectChanged.dispatch( this.object );
+  update: function (command) {
+    this.newRotation.copy(command.newRotation)
+  },
 
-	},
+  toJSON: function () {
+    var output = Command.prototype.toJSON.call(this)
 
-	undo: function () {
+    output.objectUuid = this.object.uuid
+    output.oldRotation = this.oldRotation.toArray()
+    output.newRotation = this.newRotation.toArray()
 
-		this.object.rotation.copy( this.oldRotation );
-		this.object.updateMatrixWorld( true );
-		this.editor.signals.objectChanged.dispatch( this.object );
+    return output
+  },
 
-	},
+  fromJSON: function (json) {
+    Command.prototype.fromJSON.call(this, json)
 
-	update: function ( command ) {
-
-		this.newRotation.copy( command.newRotation );
-
-	},
-
-	toJSON: function () {
-
-		var output = Command.prototype.toJSON.call( this );
-
-		output.objectUuid = this.object.uuid;
-		output.oldRotation = this.oldRotation.toArray();
-		output.newRotation = this.newRotation.toArray();
-
-		return output;
-
-	},
-
-	fromJSON: function ( json ) {
-
-		Command.prototype.fromJSON.call( this, json );
-
-		this.object = this.editor.objectByUuid( json.objectUuid );
-		this.oldRotation = new THREE.Euler().fromArray( json.oldRotation );
-		this.newRotation = new THREE.Euler().fromArray( json.newRotation );
-
-	}
-
-};
+    this.object = this.editor.objectByUuid(json.objectUuid)
+    this.oldRotation = new THREE.Euler().fromArray(json.oldRotation)
+    this.newRotation = new THREE.Euler().fromArray(json.newRotation)
+  },
+}

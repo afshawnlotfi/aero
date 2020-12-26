@@ -239,4 +239,3 @@ Sidebar.Condition = function (editor) {
   updateCondition()
   return container
 }
-
