@@ -563,20 +563,6 @@ Sidebar.Analysis = function ( editor ) {
 
         update();
 
-        $.blockUI({
-            message: '<h1><img src="http://aero.go.usu.edu/sharedfiles/bc.GIF" /> Just a sec...</h1>',
-            fadeIn: 400,
-            fadeOut: 200,
-            css: {
-                'font-size': '10px',
-                backgroundColor: '#000',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                opacity: 1.0,
-                color: '#fff'
-            }
-        });
-
 		runAnalysis(editor, run_callback);
 	}
 

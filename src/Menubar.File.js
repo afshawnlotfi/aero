@@ -146,19 +146,8 @@ Menubar.File = function (editor) {
 
   //
 
-  options.add(new UI.HorizontalRule())
 
-  // Quit // DFH
 
-  var option = new UI.Panel()
-  option.setClass("option")
-  option.setTextContent("Quit")
-  option.onClick(function () {
-    window.location.href = "http://aero.go.usu.edu/machup"
-  })
-  options.add(option)
-
-  //
 
   var link = document.createElement("a")
   link.style.display = "none"
